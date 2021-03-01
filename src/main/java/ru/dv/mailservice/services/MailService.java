@@ -1,6 +1,7 @@
 package ru.dv.mailservice.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -39,5 +40,28 @@ public class MailService {
             e.printStackTrace();
         }
     }
+
+    public void sendMailWithAttachment(String email, String subject, String text, String attachPath) throws MessagingException {
+		MimeMessage message = sender.createMimeMessage();
+		MimeMessageHelper helper = new MimeMessageHelper(message, true);
+
+        try {
+            helper.setTo(email);
+            helper.setText(text, true);
+            helper.setSubject(subject);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+
+		FileSystemResource file = new FileSystemResource(attachPath);
+		helper.addAttachment(file.getFilename(), file);
+
+        try {
+            executorService.submit(() -> sender.send(message));
+        } catch (MailException e) {
+            e.printStackTrace();
+        }
+
+	}
 
 }

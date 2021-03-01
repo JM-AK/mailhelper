@@ -41,8 +41,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public User findByUserName(String username) {
-        return userRepository.findOneByUserName(username);
+    public User findByUsername(String username) {
+        return userRepository.findOneByUsername(username);
     }
 
     @Override
@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService {
     public boolean save(SystemUser systemUser) {
         User user = new User();
 
-        if (findByUserName(systemUser.getUserName()) != null) {
+        if (findByUsername(systemUser.getUserName()) != null) {
             return false;
         }
 
@@ -69,7 +69,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        User user = userRepository.findOneByUserName(userName);
+        User user = userRepository.findOneByUsername(userName);
         if (user == null) {
             throw new UsernameNotFoundException("Invalid username or password.");
         }

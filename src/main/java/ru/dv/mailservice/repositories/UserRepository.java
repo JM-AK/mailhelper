@@ -6,5 +6,5 @@ import ru.dv.mailservice.entities.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-    User findOneByUserName(String userName);
+    User findOneByUsername(String username);
 }

@@ -5,6 +5,6 @@ import ru.dv.mailservice.entities.SystemUser;
 import ru.dv.mailservice.entities.User;
 
 public interface UserService extends UserDetailsService {
-   User findByUserName(String username);
+   User findByUsername(String username);
    boolean save(SystemUser systemUser);
 }

@@ -41,7 +41,7 @@ public class User {
 
     static {
         COLUMN_MAPPINGS.put("id", "id");
-        COLUMN_MAPPINGS.put("username", "userName");
+        COLUMN_MAPPINGS.put("username", "username");
         COLUMN_MAPPINGS.put("password", "password");
         COLUMN_MAPPINGS.put("first_name", "firstName");
         COLUMN_MAPPINGS.put("last_name", "lastName");

@@ -17,7 +17,7 @@ public class MailConfig {
     @Value("${mail.password")
     private String password;
 
-    @Bean
+    @Bean("gmail")
     public JavaMailSender javaMailSender() {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
         mailSender.setHost("smtp.gmail.com");

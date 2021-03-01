@@ -1,0 +1,26 @@
+package ru.dv.mailservice.controllers;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import ru.dv.mailservice.services.MailService;
+
+@Controller
+public class SimpleMailController {
+    private MailService mailService;
+
+    @Autowired
+    public void setMailService(MailService mailService) {
+        this.mailService = mailService;
+    }
+
+    @ResponseBody
+    @RequestMapping("/sendSimpleEmail")
+    public String sendSimpleEmail() {
+        mailService.sendMail("myapptestingmar2021@gmail.com","myapptestingmar2021@gmail.com", null,null ,"test", "test-email-body");
+        return "Email Sent!";
+    }
+
+}

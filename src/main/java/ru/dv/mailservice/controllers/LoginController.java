@@ -7,17 +7,9 @@ import ru.dv.mailservice.services.MailService;
 
 @Controller
 public class LoginController {
-    private MailService mailService;
-
-    @Autowired
-    public void setMailService(MailService mailService) {
-        this.mailService = mailService;
-    }
 
     @GetMapping("/login")
     public String showMyLoginPage() {
-        mailService.sendMail("myapptestingmar2021@gmail.com","alexander.komlev@digitech.ventures", null,null ,"test", "test-email-body");
-
         return "login";
     }
 }

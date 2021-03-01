@@ -11,13 +11,13 @@ import java.util.Properties;
 @Configuration
 public class MailConfig {
 
-    @Value("${mail.username")
+    @Value("${mail.username}")
     private String username;
 
-    @Value("${mail.password")
+    @Value("${mail.password}")
     private String password;
 
-    @Bean("gmail")
+    @Bean
     public JavaMailSender javaMailSender() {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
         mailSender.setHost("smtp.gmail.com");

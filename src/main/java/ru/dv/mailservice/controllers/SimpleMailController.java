@@ -19,7 +19,8 @@ public class SimpleMailController {
     @ResponseBody
     @RequestMapping("/sendSimpleEmail")
     public String sendSimpleEmail() {
-        mailService.sendMail("myapptestingmar2021@gmail.com","myapptestingmar2021@gmail.com", null,null ,"test", "test-email-body");
+//        mailService.sendMail("myapptestingmar2021@gmail.com","myapptestingmar2021@gmail.com", null,null ,"test-email", "Паша, привет\r Это сообщение тестовое из приложения по автоматизации писем");
+        mailService.sendMailWithAttachment("myapptestingmar2021@gmail.com","myapptestingmar2021@gmail.com", null,null ,"test-email", "Паша, привет\n Это сообщение тестовое из приложения по автоматизации писем","/Users/komlev/IdeaProjects/mailhelper/src/main/resources/static/favicon.ico");
         return "Email Sent!";
     }
 

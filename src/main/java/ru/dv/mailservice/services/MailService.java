@@ -39,21 +39,23 @@ public class MailService {
         logger.info("Email sent successfully To {},{} with Subject {}", toAddress, ccAddress, subject);
     }
 
-    public void sendMailWithAttachment(String email, String subject, String text, String attachPath) throws MessagingException {
-		MimeMessage message = sender.createMimeMessage();
-		MimeMessageHelper helper = new MimeMessageHelper(message, true);
-
-        try {
-            helper.setTo(email);
-            helper.setText(text, true);
-            helper.setSubject(subject);
-        } catch (MessagingException e) {
-            e.printStackTrace();
-        }
-
-		FileSystemResource file = new FileSystemResource(attachPath);
-		helper.addAttachment(file.getFilename(), file);
-        sender.send(message);
-	}
+    public void sendMailWithAttachment(String from, String toAddress, String ccAddress, String bccAddress, String subject, String body, String attachPath) {
+		MimeMessagePreparator preparator = mimeMessage -> {
+            MimeMessageHelper message = new MimeMessageHelper(mimeMessage, true);
+            message.setTo(toAddress.split("[,;]"));
+            message.setFrom(from, "<From Name>");
+            message.setSubject(subject);
+            if (ccAddress != null)
+                message.setCc(ccAddress.split("[;,]"));
+            if (bccAddress != null)
+                message.setBcc(bccAddress.split("[;,]"));
+            message.setText(body, false);
+		    if (attachPath != null) {
+                FileSystemResource file = new FileSystemResource(attachPath);
+                message.addAttachment(file.getFilename(), file);
+            }
+        };
+        sender.send(preparator);
+    }
 
 }

@@ -2,6 +2,7 @@ package ru.dv.mailhelper.entities;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.dv.mailhelper.enums.MsgAddressType;
 
 import javax.persistence.*;
 import java.util.Map;
@@ -16,18 +17,15 @@ public class MailingItem {
     @Column(name = "id")
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "company_id")
+    @Embedded
+    @AttributeOverride(name = "shortName", column = @Column(name = "company_name"))
     private Company company;
 
-//    private Map<Contact, > contactItemMap;
-
-
-//    @OneToMany(cascade = CascadeType.ALL)
-//    @JoinTable(name = "order_item_mapping",
-//            joinColumns = {@JoinColumn(name = "order_id", referencedColumnName = "id")},
-//            inverseJoinColumns = {@JoinColumn(name = "item_id", referencedColumnName = "id")})
-//    @MapKeyJoinColumn(name = "seller_id")
-//    private Map<Seller, Item> sellerItemMap;
+    @ElementCollection
+    @CollectionTable(name = "mailing-items_contacts_mapping",
+                    joinColumns = @JoinColumn(name = "mailing-item_id", referencedColumnName = "id"))
+    @MapKeyColumn(name = "contact_email")
+    @Column(name = "address_type")
+    private Map<Contact, MsgAddressType> msgAddressMap;
 
 }

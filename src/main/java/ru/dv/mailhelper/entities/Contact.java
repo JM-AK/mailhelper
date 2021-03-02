@@ -29,16 +29,6 @@ public class Contact {
     @Column(name = "phone")
     private String phone;
 
-//    @Enumerated(value = EnumType.STRING)
-//    @Column(name = "contact_type")
-//    private ContactType contactType;
-
-//    @ManyToMany(fetch = FetchType.LAZY)
-//    @JoinTable(name = "contacts_companies",
-//            joinColumns = @JoinColumn(name = "contact_id"),
-//            inverseJoinColumns = @JoinColumn(name = "company_id"))
-//    private List<Company> companies;
-
     @Override
     public String toString() {
         return "Contact{" +

@@ -1,4 +1,4 @@
-package ru.dv.mailservice.config;
+package ru.dv.mailhelper.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -14,7 +14,7 @@ import java.util.Locale;
 
 @Configuration
 @PropertySource("classpath:private.properties")
-@ComponentScan("ru.dv.mailservice")
+@ComponentScan("ru.dv.mailhelper")
 public class AppConfig implements WebMvcConfigurer {
 
     @Bean

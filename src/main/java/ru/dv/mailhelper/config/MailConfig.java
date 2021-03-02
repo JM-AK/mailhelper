@@ -1,4 +1,4 @@
-package ru.dv.mailservice.config;
+package ru.dv.mailhelper.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

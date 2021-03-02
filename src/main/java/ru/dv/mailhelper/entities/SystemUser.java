@@ -1,9 +1,9 @@
-package ru.dv.mailservice.entities;
+package ru.dv.mailhelper.entities;
 
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.dv.mailservice.validation.FieldMatch;
+import ru.dv.mailhelper.validation.FieldMatch;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;

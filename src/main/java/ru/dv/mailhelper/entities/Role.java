@@ -1,4 +1,4 @@
-package ru.dv.mailservice.entities;
+package ru.dv.mailhelper.entities;
 
 import lombok.Data;
 

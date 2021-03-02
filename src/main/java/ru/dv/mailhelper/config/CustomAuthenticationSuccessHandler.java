@@ -1,11 +1,11 @@
-package ru.dv.mailservice.config;
+package ru.dv.mailhelper.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
-import ru.dv.mailservice.entities.User;
-import ru.dv.mailservice.services.UserService;
+import ru.dv.mailhelper.entities.User;
+import ru.dv.mailhelper.services.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

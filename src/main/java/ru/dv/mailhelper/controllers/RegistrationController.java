@@ -1,4 +1,4 @@
-package ru.dv.mailservice.controllers;
+package ru.dv.mailhelper.controllers;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,9 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-import ru.dv.mailservice.entities.SystemUser;
-import ru.dv.mailservice.entities.User;
-import ru.dv.mailservice.services.UserService;
+import ru.dv.mailhelper.entities.SystemUser;
+import ru.dv.mailhelper.entities.User;
+import ru.dv.mailhelper.services.UserService;
 
 import javax.validation.Valid;
 

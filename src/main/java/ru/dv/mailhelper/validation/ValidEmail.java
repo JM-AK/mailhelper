@@ -1,4 +1,4 @@
-package ru.dv.mailservice.validation;
+package ru.dv.mailhelper.validation;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

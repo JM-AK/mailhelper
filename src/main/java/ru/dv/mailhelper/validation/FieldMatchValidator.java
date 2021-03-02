@@ -1,4 +1,4 @@
-package ru.dv.mailservice.validation;
+package ru.dv.mailhelper.validation;
 
 import org.springframework.beans.BeanWrapperImpl;
 

@@ -1,4 +1,4 @@
-package ru.dv.mailservice.services;
+package ru.dv.mailhelper.services;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

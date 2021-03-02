@@ -1,4 +1,4 @@
-package ru.dv.mailservice.services;
+package ru.dv.mailhelper.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -8,11 +8,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.dv.mailservice.entities.Role;
-import ru.dv.mailservice.entities.SystemUser;
-import ru.dv.mailservice.entities.User;
-import ru.dv.mailservice.repositories.RoleRepository;
-import ru.dv.mailservice.repositories.UserRepository;
+import ru.dv.mailhelper.entities.Role;
+import ru.dv.mailhelper.entities.SystemUser;
+import ru.dv.mailhelper.entities.User;
+import ru.dv.mailhelper.repositories.RoleRepository;
+import ru.dv.mailhelper.repositories.UserRepository;
 
 import java.util.Arrays;
 import java.util.Collection;

@@ -4,14 +4,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
-import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Service;
-
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
 
 @Service
 public class MailService {
@@ -24,24 +20,26 @@ public class MailService {
     }
 
     public void sendMail(String from, String toAddress, String ccAddress, String bccAddress, String subject, String body) {
-        MimeMessagePreparator preparator = mimeMessage -> {
-            MimeMessageHelper message = new MimeMessageHelper(mimeMessage);
-            message.setTo(toAddress.split("[,;]"));
-            message.setFrom(from, "<From Name>");
-            message.setSubject(subject);
-            if (ccAddress != null)
-                message.setCc(ccAddress.split("[;,]"));
-            if (bccAddress != null)
-                message.setBcc(bccAddress.split("[;,]"));
-            message.setText(body, false);
-        };
+        MimeMessagePreparator preparator = createMessage(from, toAddress,ccAddress,bccAddress, subject, body, null);
         sender.send(preparator);
         logger.info("Email sent successfully To {},{} with Subject {}", toAddress, ccAddress, subject);
     }
 
     public void sendMailWithAttachment(String from, String toAddress, String ccAddress, String bccAddress, String subject, String body, String attachPath) {
-		MimeMessagePreparator preparator = mimeMessage -> {
-            MimeMessageHelper message = new MimeMessageHelper(mimeMessage, true);
+		MimeMessagePreparator preparator = createMessage(from, toAddress,ccAddress,bccAddress, subject, body, attachPath);
+        sender.send(preparator);
+        logger.info("Email sent successfully To {},{} with Subject {}", toAddress, ccAddress, subject);
+    }
+
+    private MimeMessagePreparator createMessage (String from,
+                                                String toAddress,
+                                                String ccAddress,
+                                                String bccAddress,
+                                                String subject,
+                                                String body,
+                                                String attachPath) {
+        MimeMessagePreparator preparator = mimeMessage -> {
+            MimeMessageHelper message = new MimeMessageHelper(mimeMessage, (attachPath != null), "UTF-8");
             message.setTo(toAddress.split("[,;]"));
             message.setFrom(from, "<From Name>");
             message.setSubject(subject);
@@ -50,12 +48,12 @@ public class MailService {
             if (bccAddress != null)
                 message.setBcc(bccAddress.split("[;,]"));
             message.setText(body, false);
-		    if (attachPath != null) {
+            if (attachPath != null) {
                 FileSystemResource file = new FileSystemResource(attachPath);
                 message.addAttachment(file.getFilename(), file);
             }
         };
-        sender.send(preparator);
+        return preparator;
     }
 
 }

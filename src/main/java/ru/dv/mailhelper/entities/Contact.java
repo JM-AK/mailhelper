@@ -5,7 +5,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
-import java.util.List;
 
 @Entity
 @Data
@@ -30,11 +29,15 @@ public class Contact {
     @Column(name = "phone")
     private String phone;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "contacts_companies",
-            joinColumns = @JoinColumn(name = "contact_id"),
-            inverseJoinColumns = @JoinColumn(name = "company_id"))
-    private List<Company> companies;
+//    @Enumerated(value = EnumType.STRING)
+//    @Column(name = "contact_type")
+//    private ContactType contactType;
+
+//    @ManyToMany(fetch = FetchType.LAZY)
+//    @JoinTable(name = "contacts_companies",
+//            joinColumns = @JoinColumn(name = "contact_id"),
+//            inverseJoinColumns = @JoinColumn(name = "company_id"))
+//    private List<Company> companies;
 
     @Override
     public String toString() {

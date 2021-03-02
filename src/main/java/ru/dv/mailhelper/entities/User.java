@@ -1,6 +1,7 @@
 package ru.dv.mailhelper.entities;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -10,6 +11,7 @@ import java.util.Map;
 @Entity
 @Data
 @Table(name = "users")
+@NoArgsConstructor
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,9 +48,6 @@ public class User {
         COLUMN_MAPPINGS.put("first_name", "firstName");
         COLUMN_MAPPINGS.put("last_name", "lastName");
         COLUMN_MAPPINGS.put("email", "email");
-    }
-
-    public User(){
     }
 
     public User(String username, String password, String firstName, String lastName, String email) {

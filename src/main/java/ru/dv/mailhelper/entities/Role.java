@@ -1,12 +1,14 @@
 package ru.dv.mailhelper.entities;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
 @Data
 @Table(name = "roles")
+@NoArgsConstructor
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,9 +17,6 @@ public class Role {
 
     @Column(name = "name")
     private String name;
-
-    public Role() {
-    }
 
     public Role(Long id, String name) {
         this.id = id;

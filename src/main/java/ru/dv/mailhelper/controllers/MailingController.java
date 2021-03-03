@@ -40,14 +40,6 @@ public class MailingController {
     @ResponseBody
     @RequestMapping("/test")
     public String testMailings(){
-        Contact contact = new Contact("F1", "L1", "E1@gmail.com", "P1");
-        contactService.saveContact(contact);
-        Mailing mailing = new Mailing();
-        mailing.setCompany(new Company("C1", "FC1"));
-        Map<Contact, MsgAddressType> map = new HashMap<>();
-        map.put(contact, MsgAddressType.TO);
-        mailing.setMsgAddressMap(map);
-        mailingService.saveMailing(mailing);
 
         List<Mailing> mailingList = mailingService.findAllMailing();
 

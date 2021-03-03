@@ -26,7 +26,7 @@ public class Mailing {
     @ElementCollection
     @CollectionTable(name = "mailings_contacts_mapping",
                     joinColumns = @JoinColumn(name = "mailing_id", referencedColumnName = "id"))
-    @MapKeyColumn(name = "contact_email")
+    @MapKeyJoinColumn(name = "contact_id")
     @Column(name = "address_type")
     @Enumerated(EnumType.STRING)
     private Map<Contact, MsgAddressType> msgAddressMap;

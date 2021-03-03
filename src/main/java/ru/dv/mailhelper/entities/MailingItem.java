@@ -10,7 +10,7 @@ import java.util.Map;
 @Entity
 @Data
 @NoArgsConstructor
-@Table(name = "mailing_items")
+@Table(name = "mailing-items")
 public class MailingItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

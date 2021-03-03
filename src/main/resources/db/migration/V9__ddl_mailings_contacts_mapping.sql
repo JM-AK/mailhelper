@@ -2,9 +2,9 @@ DROP TABLE IF EXISTS mailings_contacts_mapping;
 
 CREATE TABLE mailings_contacts_mapping
 (
-    mailing_id    INT          NOT NULL,
-    contact_id NVARCHAR(50) NOT NULL,
-    address_type  NVARCHAR(50) NOT NULL,
+    mailing_id   INT          NOT NULL,
+    contact_id   INT          NOT NULL,
+    address_type NVARCHAR(50) NOT NULL,
     PRIMARY KEY (mailing_id, contact_id, address_type),
 
     CONSTRAINT FK_MAILINGS_CONTACTS_MAPPING__MAILINGS__ID FOREIGN KEY (mailing_id)

@@ -18,8 +18,8 @@ public class Mailing {
     private Long id;
 
     @Embedded
-    @AttributeOverride(name = "shortName", column = @Column(name = "company_name"))
-    @AttributeOverride(name = "fullName", column = @Column(name = "company_legalname"))
+    @AttributeOverrides({@AttributeOverride(name = "shortName", column = @Column(name = "company_name")),
+                         @AttributeOverride(name = "fullName", column = @Column(name = "company_legalname"))})
     private Company company;
 
     @ElementCollection
@@ -27,6 +27,7 @@ public class Mailing {
                     joinColumns = @JoinColumn(name = "mailing_id", referencedColumnName = "id"))
     @MapKeyColumn(name = "contact_email")
     @Column(name = "address_type")
+    @Enumerated(EnumType.STRING)
     private Map<Contact, MsgAddressType> msgAddressMap;
 
 }

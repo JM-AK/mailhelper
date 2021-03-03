@@ -1,5 +1,6 @@
 package ru.dv.mailhelper.entities;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.dv.mailhelper.enums.MsgAddressType;

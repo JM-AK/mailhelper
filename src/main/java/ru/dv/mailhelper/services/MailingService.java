@@ -22,5 +22,8 @@ public class MailingService {
         return mailingRepository.findAll();
     }
 
+    public Mailing saveMailing(Mailing mailing) {
+        return mailingRepository.save(mailing);
+    }
 
 }

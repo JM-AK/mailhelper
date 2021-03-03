@@ -4,14 +4,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import ru.dv.mailhelper.entities.Company;
+import ru.dv.mailhelper.entities.Contact;
 import ru.dv.mailhelper.entities.Mailing;
+import ru.dv.mailhelper.enums.MsgAddressType;
+import ru.dv.mailhelper.services.ContactService;
 import ru.dv.mailhelper.services.MailingService;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-@Controller
+@Controller("/mailings")
 public class MailingController {
     private MailingService mailingService;
+    private ContactService contactService;
+
+    @Autowired
+    public void setContactService(ContactService contactService) {
+        this.contactService = contactService;
+    }
 
     @Autowired
     public void setMailingService(MailingService mailingService) {
@@ -19,9 +31,27 @@ public class MailingController {
     }
 
     @ResponseBody
-    @RequestMapping("/mailings")
+    @RequestMapping("/all")
     public String getAllMailings(){
         List<Mailing> mailingList = mailingService.findAllMailing();
         return mailingList.toString();
     }
+
+    @ResponseBody
+    @RequestMapping("/test")
+    public String testMailings(){
+        Contact contact = new Contact("F1", "L1", "E1@gmail.com", "P1");
+        contactService.saveContact(contact);
+        Mailing mailing = new Mailing();
+        mailing.setCompany(new Company("C1", "FC1"));
+        Map<Contact, MsgAddressType> map = new HashMap<>();
+        map.put(contact, MsgAddressType.TO);
+        mailing.setMsgAddressMap(map);
+        mailingService.saveMailing(mailing);
+
+        List<Mailing> mailingList = mailingService.findAllMailing();
+
+        return mailingList.toString();
+    }
+
 }

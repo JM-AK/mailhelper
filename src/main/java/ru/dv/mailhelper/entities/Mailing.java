@@ -10,8 +10,8 @@ import java.util.Map;
 @Entity
 @Data
 @NoArgsConstructor
-@Table(name = "mailing-items")
-public class MailingItem {
+@Table(name = "mailings")
+public class Mailing {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -19,11 +19,12 @@ public class MailingItem {
 
     @Embedded
     @AttributeOverride(name = "shortName", column = @Column(name = "company_name"))
+    @AttributeOverride(name = "fullName", column = @Column(name = "company_legalname"))
     private Company company;
 
     @ElementCollection
-    @CollectionTable(name = "mailing-items_contacts_mapping",
-                    joinColumns = @JoinColumn(name = "mailing-item_id", referencedColumnName = "id"))
+    @CollectionTable(name = "mailings_contacts_mapping",
+                    joinColumns = @JoinColumn(name = "mailing_id", referencedColumnName = "id"))
     @MapKeyColumn(name = "contact_email")
     @Column(name = "address_type")
     private Map<Contact, MsgAddressType> msgAddressMap;

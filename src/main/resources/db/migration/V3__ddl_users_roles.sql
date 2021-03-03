@@ -14,4 +14,4 @@ CREATE TABLE users_roles
     CONSTRAINT FK_USERS_ROLES__ROLES__ID FOREIGN KEY (role_id)
         REFERENCES roles (id)
         ON DELETE NO ACTION ON UPDATE NO ACTION
-) ;
+);

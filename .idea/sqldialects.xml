@@ -3,5 +3,6 @@
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/src/main/resources/db/migration/V1__ddl_users.sql" dialect="TSQL" />
     <file url="file://$PROJECT_DIR$/src/main/resources/db/migration/V2__ddl_roles.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/db/migration/V8__ddl_mailings.sql" dialect="TSQL" />
   </component>
 </project>

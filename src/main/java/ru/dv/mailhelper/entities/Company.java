@@ -8,10 +8,8 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 public class Company {
-    @Column(name = "short_name")
     private String shortName;
 
-    @Column(name = "full_name")
     private String fullName;
 
 }

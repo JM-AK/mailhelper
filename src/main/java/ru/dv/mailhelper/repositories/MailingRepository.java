@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import ru.dv.mailhelper.entities.Mailing;
 
 @Repository
-public interface MailingItemRepository extends JpaRepository<Mailing, Long> {
+public interface MailingRepository extends JpaRepository<Mailing, Long> {
 }

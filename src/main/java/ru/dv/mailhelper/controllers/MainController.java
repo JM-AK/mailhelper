@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public class MainController {
     @RequestMapping("/")
-    public String showHomePage(HttpServletRequest request, HttpServletResponse response) {
+    public String showHomePage() {
         return "index";
     }
 }

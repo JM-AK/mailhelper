@@ -28,8 +28,8 @@
             <ul class="navbar-nav">
 
                 <li sec:authorize="isAuthenticated()" class="nav-item"
-                    th:classappend="${activeTab == 'Messages' ? 'active' : ''}">
-                    <a class="nav-link" th:href="@{/messages/?page=1}">Сообщения<span
+                    th:classappend="${activeTab == 'Mailing' ? 'active' : ''}">
+                    <a class="nav-link" th:href="@{/mailing}">Рассылка<span
                             class="sr-only">(current)</span></a>
                 </li>
 

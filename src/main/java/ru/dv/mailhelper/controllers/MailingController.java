@@ -31,7 +31,7 @@ public class MailingController {
     @GetMapping
     public String showMailingPage(Model model){
         List<Mailing> mailingList = mailingService.findAllMailing();
-        model.addAttribute(mailingList);
+        model.addAttribute("mailingList", mailingList);
         return "mailing-page";
     }
 

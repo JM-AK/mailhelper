@@ -10,9 +10,10 @@
 
     <link rel="icon" type="image/png" th:href="@{/favicon.ico}"/>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -30,13 +31,13 @@
                 <li sec:authorize="isAuthenticated()" class="nav-item"
                     th:classappend="${activeTab == 'Mailing' ? 'active' : ''}">
                     <a class="nav-link" th:href="@{/mailing}">Рассылка<span
-                            class="sr-only">(current)</span></a>
+                            class="sr-only"></span></a>
                 </li>
 
                 <li sec:authorize="isAuthenticated()" class="nav-item"
                     th:classappend="${activeTab == 'Contacts' ? 'active' : ''}">
                     <a class="nav-link" th:href="@{/contacts/?page=1}">Контакты<span
-                            class="sr-only">(current)</span></a>
+                            class="sr-only"></span></a>
                 </li>
 
                 <li sec:authorize="hasRole('ADMIN')" class="nav-item"
@@ -52,11 +53,11 @@
 
                 <li sec:authorize="isAnonymous()" class="nav-item">
                     <form class="align-middle" th:action="@{/authenticateTheUser}" method="POST">
-                        <div class="input-group-prepend">
+                        <div class="input-group mb-3">
                             <input class="form-control" type="text" placeholder="Логин" name="username"
-                                   aria-describedby="inputGroup-sizing-sm">
+                                   aria-describedby="inputGroup-sizing-sm"/>
                             <input class="form-control" type="text" placeholder="Пароль" name="password"
-                                   aria-describedby="inputGroup-sizing-sm">
+                                   aria-describedby="inputGroup-sizing-sm"/>
                             <button class="btn btn-secondary btn-sm" type="submit">Войти</button>
                         </div>
                     </form>

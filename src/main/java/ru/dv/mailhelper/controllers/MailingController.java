@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import ru.dv.mailhelper.entities.Mailing;
+import ru.dv.mailhelper.enums.MsgAddressType;
 import ru.dv.mailhelper.services.ContactService;
 import ru.dv.mailhelper.services.MailingService;
 
@@ -50,6 +51,8 @@ public class MailingController {
             mailing.setId(0L);
         }
         model.addAttribute("mailing", mailing);
+        model.addAttribute("contacts", contactService.findAllContacts());
+        model.addAttribute("address_types", MsgAddressType.values());
         return "edit-mailing-page";
     }
 

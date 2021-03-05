@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import ru.dv.mailhelper.entities.Contact;
 import ru.dv.mailhelper.repositories.ContactRepository;
 
+import java.util.List;
+
 @Service
 public class ContactService {
     private ContactRepository contactRepository;
@@ -17,4 +19,9 @@ public class ContactService {
     public Contact saveContact(Contact contact) {
         return contactRepository.save(contact);
     }
+
+    public List<Contact> findAllContacts() {
+        return contactRepository.findAll();
+    }
+
 }

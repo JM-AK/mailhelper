@@ -30,7 +30,8 @@
             <div class="card">
                 <header class="card-header">
                     <h4 class="card-title mt-2"><span
-                            th:text="${mailing.getId() == 0} ? 'Добавление рассылки' : 'Изменение рассылки'"></span></h4>
+                            th:text="${mailing.getId() == 0} ? 'Добавление рассылки' : 'Изменение рассылки'"></span>
+                    </h4>
                 </header>
                 <article class="card-body">
                     <form th:action="@{/mailing/edit}" th:object="${mailing}" method="POST"
@@ -51,7 +52,7 @@
                             </div>
                             <div class="mb-3">
                                 <label>Тело сообщения</label>
-                                <textarea th:field="*{body}" rows="3" class="form-control" ></textarea>
+                                <textarea th:field="*{body}" rows="3" class="form-control"></textarea>
                             </div>
                             <div class="mb-3">
                                 <label>Вложение</label>
@@ -62,22 +63,43 @@
                         <div class="form-row">
                             <div class="input-group">
                                 <div class="form-group col-md-12">
-                                    <label>Выберите категорию</label>
-                                    <select th:field="" class="form-control">
-                                        <option th:each="c: ${categories}"
-                                                th:value="${category.id}"
-                                                th:text="${category.title}">
-                                        </option>
-                                    </select>
+                                    <label>Выберите контакты</label>
+                                    <table>
+                                        <body>
+                                        <tr th:each="c : *{msgAddressMap}">
+                                            <td>
+                                                <select name="contactSel" id="contactSel">
+                                                    <option th:each="i : ${contacts}"
+                                                            th:value="${i}"
+                                                            th:text="${i.email}"
+                                                    ></option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <select name="addressSel" id="addressSel">
+                                                    <option th:each="i : ${address_types}"
+                                                            th:value="${i}"
+                                                            th:text="${i.name()}"
+                                                    ></option>
+                                                </select>
+                                            </td>
+                                            <td>
+
+                                            </td>
+                                        </tr>
+
+                                        </body>
+
+                                    </table>
                                 </div>
                             </div>
 
                         </div>
-                        
+
 
                         <div class="form-group">
                             <button type="submit" name="addProduct" class="btn btn-primary btn-block"
-                                    onclick="sendName()">Сохранить
+                            >Сохранить
                             </button>
                         </div>
                     </form>

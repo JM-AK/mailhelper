@@ -63,33 +63,39 @@
                         <div class="form-row">
                             <div class="input-group">
                                 <div class="form-group col-md-12">
-                                    <label>Добавить контакт</label>
-                                    <table>
-                                        <tbody>
-                                        <td>
-                                            <select class="form-select form-select-sm">
-                                                <option th:each="i : ${contacts}"
-                                                        th:value="${i}"
-                                                        th:text="${i.email}"
-                                                ></option>
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <select class="form-select form-select-sm">
-                                                <option th:each="i : ${address_types}"
-                                                        th:value="${i}"
-                                                        th:text="${i.name()}"
-                                                ></option>
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <a class="btn btn-success">
-                                                <i class="fas fa-edit">добавить</i>
-                                            </a>
-                                        </td>
-                                        </tbody>
-                                    </table>
+                                    <p>
+                                        <button class="btn btn-success" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAddFrom" aria-expanded="false" aria-controls="collapseAddFrom">
+                                        Добавить контакт
+                                        </button>
+                                    </p>
+                                    <div class="collapse" id="collapseAddFrom">
+                                        <table>
+                                            <tbody>
+                                            <td>
+                                                <select class="form-select form-select-sm">
+                                                    <option th:each="i : ${contacts}"
+                                                            th:value="${i}"
+                                                            th:text="${i.email}"
+                                                    ></option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <select class="form-select form-select-sm">
+                                                    <option th:each="i : ${address_types}"
+                                                            th:value="${i}"
+                                                            th:text="${i.name()}"
+                                                    ></option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <button type="submit" class="btn btn-primary btn-block">
+                                                    +
+                                                </button>
+                                            </td>
 
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -118,8 +124,8 @@
                                                 </select>
                                             </td>
                                             <td>
-                                                <a class="btn btn-danger">
-                                                    <i class="fas fa-edit">удалить</i>
+                                                <a type="submit" class="btn btn-danger">
+                                                    <i class="far fa-trash-alt">X</i>
                                                 </a>
                                             </td>
                                         </tr>

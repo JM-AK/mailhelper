@@ -63,6 +63,40 @@
                         <div class="form-row">
                             <div class="input-group">
                                 <div class="form-group col-md-12">
+                                    <label>Добавить контакт</label>
+                                    <table>
+                                        <tbody>
+                                        <td>
+                                            <select class="form-select form-select-sm">
+                                                <option th:each="i : ${contacts}"
+                                                        th:value="${i}"
+                                                        th:text="${i.email}"
+                                                ></option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="form-select form-select-sm">
+                                                <option th:each="i : ${address_types}"
+                                                        th:value="${i}"
+                                                        th:text="${i.name()}"
+                                                ></option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-success">
+                                                <i class="fas fa-edit">добавить</i>
+                                            </a>
+                                        </td>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="input-group">
+                                <div class="form-group col-md-12">
                                     <label>Выберите контакты</label>
                                     <table>
                                         <body>
@@ -84,7 +118,7 @@
                                                 </select>
                                             </td>
                                             <td>
-                                                <a class="btn btn-danger" >
+                                                <a class="btn btn-danger">
                                                     <i class="fas fa-edit">удалить</i>
                                                 </a>
                                             </td>

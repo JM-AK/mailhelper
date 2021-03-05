@@ -38,17 +38,29 @@
                 <th>все</th>
                 <th>ID</th>
                 <th>ДЗО</th>
-                <th></th>
+                <th>Сообщение</th>
                 <th>Вложения</th>
+                <th>Кому</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="m : ${mailingList}">
 
-                <td th:text="вкл">вкл</td>
+                <td>
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                </td>
                 <td th:text="${m.getId()}">2</td>
                 <td th:text="${m.getCompany().getShortName()}">company_2</td>
-                <td>path to attachement</td>
+                <td>
+                    <a class="btn btn-success" th:href="@{/mailing/edit/{id}(id = ${m.id})}" th:method="GET">
+                        <i class="fas fa-edit">Редактировать</i>
+                    </a>
+                </td>
+                <td>
+                    <div class="input-group mb-1">
+                        <input type="file" class="form-control" th:text="${m.getFile()}" >
+                    </div>
+                </td>
 
                 <td colspan="3">
                     <table class="table mb-0">

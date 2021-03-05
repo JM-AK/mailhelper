@@ -1,6 +1,5 @@
 package ru.dv.mailhelper.entities;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.dv.mailhelper.enums.MsgAddressType;
@@ -30,5 +29,14 @@ public class Mailing {
     @Column(name = "address_type")
     @Enumerated(EnumType.STRING)
     private Map<Contact, MsgAddressType> msgAddressMap;
+
+    @Transient
+    private String subject;
+
+    @Transient
+    private String body;
+
+    @Transient
+    private String file;
 
 }

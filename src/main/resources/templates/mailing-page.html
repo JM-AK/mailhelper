@@ -31,6 +31,25 @@
     </div>
 
     <div th:unless="${mailingList.isEmpty()}">
+        <div class="mb-3">
+            <label for="subjectInput" class="form-label">Тема</label>
+            <input type="text" class="form-control" id="subjectInput" placeholder="укажите тему">
+        </div>
+        <div class="mb-3">
+            <label for="bodyTextarea" class="form-label">Сообщение</label>
+            <textarea class="form-control" id="bodyTextarea" rows="3"></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="commonFile" class="form-label">Общее вложение</label>
+            <input class="form-control form-control-sm" id="commonFile" type="file">
+        </div>
+
+        <div class="mb-3">
+            <a class="btn btn-primary" >
+                <i class="fas fa-edit">Обновить</i>
+            </a>
+        </div>
+
         <table class="table caption-top table-striped">
             <caption>Список рассылки</caption>
             <thead class="thead-light">
@@ -45,7 +64,6 @@
             </thead>
             <tbody>
             <tr th:each="m : ${mailingList}">
-
                 <td>
                     <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
                 </td>

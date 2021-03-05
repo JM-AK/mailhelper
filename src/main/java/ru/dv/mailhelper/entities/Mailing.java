@@ -37,6 +37,6 @@ public class Mailing {
     private String body;
 
     @Transient
-    private String file;
+    private String fileName;
 
 }

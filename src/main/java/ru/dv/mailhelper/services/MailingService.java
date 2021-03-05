@@ -11,6 +11,7 @@ import ru.dv.mailhelper.repositories.MailingRepository;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -44,4 +45,7 @@ public class MailingService {
                         (oldValue, newValue) -> oldValue, LinkedHashMap::new));
     }
 
+    public Optional<Mailing> findById(Long id) {
+        return mailingRepository.findById(id);
+    }
 }

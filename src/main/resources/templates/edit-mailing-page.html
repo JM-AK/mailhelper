@@ -68,7 +68,7 @@
                                         <body>
                                         <tr th:each="c : *{msgAddressMap}">
                                             <td>
-                                                <select name="contactSel" id="contactSel">
+                                                <select class="form-select form-select-sm">
                                                     <option th:each="i : ${contacts}"
                                                             th:value="${i}"
                                                             th:text="${i.email}"
@@ -76,7 +76,7 @@
                                                 </select>
                                             </td>
                                             <td>
-                                                <select name="addressSel" id="addressSel">
+                                                <select class="form-select form-select-sm">
                                                     <option th:each="i : ${address_types}"
                                                             th:value="${i}"
                                                             th:text="${i.name()}"
@@ -84,7 +84,9 @@
                                                 </select>
                                             </td>
                                             <td>
-
+                                                <a class="btn btn-danger" >
+                                                    <i class="fas fa-edit">удалить</i>
+                                                </a>
                                             </td>
                                         </tr>
 

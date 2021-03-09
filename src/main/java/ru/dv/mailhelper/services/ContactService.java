@@ -6,6 +6,7 @@ import ru.dv.mailhelper.entities.Contact;
 import ru.dv.mailhelper.repositories.ContactRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ContactService {
@@ -22,6 +23,10 @@ public class ContactService {
 
     public List<Contact> findAllContacts() {
         return contactRepository.findAll();
+    }
+
+    public Optional<Contact> findById (Long id) {
+        return contactRepository.findById(id);
     }
 
 }

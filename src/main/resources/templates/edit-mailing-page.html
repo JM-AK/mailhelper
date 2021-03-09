@@ -46,6 +46,7 @@
                                 <label>Полное наименование Компании</label>
                                 <input th:field="*{company.fullName}" type="text" class="form-control" placeholder="">
                             </div>
+                            <!--
                             <div class="mb-3">
                                 <label>Тема сообщения</label>
                                 <input th:field="*{subject}" type="text" class="form-control" placeholder="">
@@ -54,33 +55,38 @@
                                 <label>Тело сообщения</label>
                                 <textarea th:field="*{body}" rows="3" class="form-control"></textarea>
                             </div>
+
                             <div class="mb-3">
                                 <label>Вложение</label>
                                 <input th:field="*{fileName}" class="form-control form-control-sm" type="file">
                             </div>
+                            -->
                         </div>
-
                         <div class="form-row">
                             <div class="input-group">
                                 <div class="form-group col-md-12">
                                     <p>
-                                        <button class="btn btn-success" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAddFrom" aria-expanded="false" aria-controls="collapseAddFrom">
-                                        Добавить контакт
+                                        <button class="btn btn-success" type="button" data-bs-toggle="collapse"
+                                                data-bs-target="#collapseAddFrom" aria-expanded="false"
+                                                aria-controls="collapseAddFrom">
+                                            Добавить контакт
                                         </button>
                                     </p>
                                     <div class="collapse" id="collapseAddFrom">
                                         <table>
                                             <tbody>
                                             <td>
-                                                <select class="form-select form-select-sm">
+                                                <select class="form-select form-select-sm" id="newContactId"
+                                                        name="newContact">
                                                     <option th:each="i : ${contacts}"
-                                                            th:value="${i}"
+                                                            th:value="${i.id}"
                                                             th:text="${i.email}"
                                                     ></option>
                                                 </select>
                                             </td>
                                             <td>
-                                                <select class="form-select form-select-sm">
+                                                <select class="form-select form-select-sm" id="newContactType"
+                                                        name="newContactType">
                                                     <option th:each="i : ${address_types}"
                                                             th:value="${i}"
                                                             th:text="${i.name()}"
@@ -88,7 +94,8 @@
                                                 </select>
                                             </td>
                                             <td>
-                                                <button type="submit" class="btn btn-primary btn-block">
+                                                <button type="submit" class="btn btn-primary btn-block"
+                                                        th:href="@{/mailing/edit/add_contact}">
                                                     +
                                                 </button>
                                             </td>
@@ -135,17 +142,15 @@
                                     </table>
                                 </div>
                             </div>
-
-                        </div>
-
-
-                        <div class="form-group">
-                            <button type="submit" name="addProduct" class="btn btn-primary btn-block"
-                            >Сохранить
-                            </button>
+                            <div class="form-group">
+                                <button class="btn btn-primary btn-block" type="submit"
+                                >Сохранить сообщение
+                                </button>
+                            </div>
                         </div>
                     </form>
                 </article>
+
             </div>
         </div>
     </div>

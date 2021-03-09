@@ -30,13 +30,4 @@ public class Mailing {
     @Enumerated(EnumType.STRING)
     private Map<Contact, MsgAddressType> msgAddressMap;
 
-    @Transient
-    private String subject;
-
-    @Transient
-    private String body;
-
-    @Transient
-    private String fileName;
-
 }

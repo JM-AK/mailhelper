@@ -1,20 +1,20 @@
 package ru.dv.mailhelper.controllers;
 
+import javassist.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import ru.dv.mailhelper.entities.Contact;
 import ru.dv.mailhelper.entities.Mailing;
 import ru.dv.mailhelper.enums.MsgAddressType;
 import ru.dv.mailhelper.services.ContactService;
 import ru.dv.mailhelper.services.MailingService;
 
-import java.io.NotActiveException;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -36,14 +36,14 @@ public class MailingController {
     }
 
     @GetMapping
-    public String showMailingPage(Model model){
+    public String showMailingPage(Model model) {
         List<Mailing> mailingList = mailingService.findAllMailing();
         model.addAttribute("mailingList", mailingList);
         return "mailing-page";
     }
 
     @GetMapping("/edit/{id}")
-    public String showEditForm(@PathVariable(value = "id") Long id, Model model) throws NotActiveException {
+    public String showEditForm(@PathVariable(value = "id") Long id, Model model) {
         logger.info("Edit mailing with id {}", id);
         Mailing mailing = mailingService.findById(id).orElse(null);
         if (mailing == null) {
@@ -56,8 +56,25 @@ public class MailingController {
         return "edit-mailing-page";
     }
 
+    @PostMapping("/edit/add_contact")
+    public String addContact(@ModelAttribute Mailing mailing,
+                             @RequestParam(name = "newContact") Long contactId,
+                             @RequestParam(name = "newContactType") String addressType,
+                             HttpServletRequest request
+    ) throws NotFoundException {
+        Contact contact = contactService.findById(contactId).orElseThrow(() -> new NotFoundException("Нет такого контакта"));
+        mailing.getMsgAddressMap().put(contact, MsgAddressType.valueOf(addressType));
+        mailingService.saveMailing(mailing);
+        String referrer = request.getHeader("referer");
+        return "redirect:" + referrer;
+    }
 
-
-
-
+    @PostMapping("/edit")
+    public String editMailing(@ModelAttribute Mailing mailing, HttpServletRequest request){
+//        if(!file.isEmpty()){
+//            mailing.setFileName(file.getOriginalFilename());
+//        }
+        mailingService.saveMailing(mailing);
+        return "redirect:mailing";
+    }
 }

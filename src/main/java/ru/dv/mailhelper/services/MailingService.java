@@ -23,7 +23,6 @@ public class MailingService {
         this.mailingRepository = mailingRepository;
     }
 
-    @Transactional
     public List<Mailing> findAllMailing(){
         List<Mailing> mailingList = mailingRepository.findAll();
         mailingList.forEach(mailing -> mailing.setMsgAddressMap(sortMapByValue(mailing.getMsgAddressMap())));

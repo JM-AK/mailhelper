@@ -56,7 +56,7 @@ public class MailingController {
         return "edit-mailing-page";
     }
 
-    @PostMapping("/edit/add_contact")
+    @GetMapping("/edit/add_contact")
     public String addContact(@ModelAttribute Mailing mailing,
                              @RequestParam(name = "newContact") Long contactId,
                              @RequestParam(name = "newContactType") String addressType,
@@ -70,10 +70,7 @@ public class MailingController {
     }
 
     @PostMapping("/edit")
-    public String editMailing(@ModelAttribute Mailing mailing, HttpServletRequest request){
-//        if(!file.isEmpty()){
-//            mailing.setFileName(file.getOriginalFilename());
-//        }
+    public String editMailing(@ModelAttribute Mailing mailing){
         mailingService.saveMailing(mailing);
         return "redirect:mailing";
     }

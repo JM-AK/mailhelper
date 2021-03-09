@@ -5,6 +5,8 @@ CREATE TABLE mailings_contacts_mapping
     mailing_id   BIGINT NOT NULL,
     contact_id   BIGINT NOT NULL,
     address_type VARCHAR(50) NOT NULL,
+
+    CONSTRAINT PK_MAILINGS_CONTACTS_MAPPING
     PRIMARY KEY (mailing_id, contact_id, address_type),
 
     CONSTRAINT FK_MAILINGS_CONTACTS_MAPPING__MAILINGS__ID FOREIGN KEY (mailing_id)

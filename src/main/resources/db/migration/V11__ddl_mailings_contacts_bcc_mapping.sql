@@ -4,7 +4,7 @@ CREATE TABLE mailings_contacts_bcc_mapping
 (
     mailing_id   BIGINT NOT NULL,
     contact_id   BIGINT NOT NULL,
-    address_type VARCHAR(50),
+    address_type VARCHAR(50) DEFAULT ('BCC'),
 
     PRIMARY KEY (mailing_id, contact_id, address_type),
 

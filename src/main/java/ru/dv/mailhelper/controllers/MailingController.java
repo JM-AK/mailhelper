@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import ru.dv.mailhelper.entities.Contact;
 import ru.dv.mailhelper.entities.Mailing;
 import ru.dv.mailhelper.enums.MsgAddressType;
@@ -63,18 +62,14 @@ public class MailingController {
                              HttpServletRequest request
     ) throws NotFoundException {
         Contact contact = contactService.findById(contactId).orElseThrow(() -> new NotFoundException("Нет такого контакта"));
-
-        if(addressType.equals(MsgAddressType.TO.toString())) mailing.getContactTo().add(contact);
-        if(addressType.equals(MsgAddressType.COPY.toString())) mailing.getContactCopy().add(contact);
-        if(addressType.equals(MsgAddressType.BCC.toString())) mailing.getContactBcc().add(contact);
-        mailingService.saveMailing(mailing);
+        mailingService.updateContacts(mailing, contact, addressType);
         String referrer = request.getHeader("referer");
-        return "redirect:" + referrer;
+        return "redirect:/";
     }
 
     @PostMapping("/edit")
     public String editMailing(@ModelAttribute Mailing mailing){
         mailingService.saveMailing(mailing);
-        return "redirect:mailing";
+        return "redirect:/";
     }
 }

@@ -63,7 +63,10 @@ public class MailingController {
                              HttpServletRequest request
     ) throws NotFoundException {
         Contact contact = contactService.findById(contactId).orElseThrow(() -> new NotFoundException("Нет такого контакта"));
-        mailing.getMsgAddressMap().put(contact, MsgAddressType.valueOf(addressType));
+
+        if(addressType.equals(MsgAddressType.TO.toString())) mailing.getContactTo().add(contact);
+        if(addressType.equals(MsgAddressType.COPY.toString())) mailing.getContactCopy().add(contact);
+        if(addressType.equals(MsgAddressType.BCC.toString())) mailing.getContactBcc().add(contact);
         mailingService.saveMailing(mailing);
         String referrer = request.getHeader("referer");
         return "redirect:" + referrer;

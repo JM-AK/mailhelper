@@ -43,10 +43,17 @@
                 <td colspan="3">
                     <table class="table mb-0">
                         <tbody>
-                        <tr th:each="entry : ${m.getMsgAddressMap().entrySet()}">
-                            <td th:text="${entry.getValue()}">TO</td>
-                            <td th:text="${entry.getKey().getEmail()}">C1@gmail.com</td>
-                            <td th:text="${entry.getKey().getLastName()}">C1</td>
+                        <tr th:each="c : ${m.getContactTo()}">
+                            <td th:text="${c.email}">C1@gmail.com</td>
+                            <td th:text="${c.lastName}">C1</td>
+                        </tr>
+                        <tr th:each="c : ${m.getContactCopy()}">
+                            <td th:text="${c.email}">C1@gmail.com</td>
+                            <td th:text="${c.lastName}">C1</td>
+                        </tr>
+                        <tr th:each="c : ${m.getContactBcc()}">
+                            <td th:text="${c.email}">C1@gmail.com</td>
+                            <td th:text="${c.lastName}">C1</td>
                         </tr>
                         </tbody>
                     </table>

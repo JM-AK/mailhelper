@@ -113,23 +113,27 @@
                                     <label>Выберите контакты</label>
                                     <table>
                                         <body>
-                                        <tr th:each="c : *{msgAddressMap}">
+                                        <tr th:each="c : *{contactTo}">
+                                            <td th:text="${c.email}">C1@gmail.com</td>
+                                            <td th:text="${c.lastName}">C1</td>
                                             <td>
-                                                <select class="form-select form-select-sm">
-                                                    <option th:each="i : ${contacts}"
-                                                            th:value="${i}"
-                                                            th:text="${i.email}"
-                                                    ></option>
-                                                </select>
+                                                <a type="submit" class="btn btn-danger">
+                                                    <i class="far fa-trash-alt">X</i>
+                                                </a>
                                             </td>
+                                        </tr>
+                                        <tr th:each="c : *{contactCopy}">
+                                            <td th:text="${c.email}">C1@gmail.com</td>
+                                            <td th:text="${c.lastName}">C1</td>
                                             <td>
-                                                <select class="form-select form-select-sm">
-                                                    <option th:each="i : ${address_types}"
-                                                            th:value="${i}"
-                                                            th:text="${i.name()}"
-                                                    ></option>
-                                                </select>
+                                                <a type="submit" class="btn btn-danger">
+                                                    <i class="far fa-trash-alt">X</i>
+                                                </a>
                                             </td>
+                                        </tr>
+                                        <tr th:each="c : *{contactBcc}">
+                                            <td th:text="${c.email}">C1@gmail.com</td>
+                                            <td th:text="${c.lastName}">C1</td>
                                             <td>
                                                 <a type="submit" class="btn btn-danger">
                                                     <i class="far fa-trash-alt">X</i>

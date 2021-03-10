@@ -22,15 +22,88 @@
     <br>
     <h1>Настройка текущей рассылки</h1>
 
-    <div th:unless="${msgbuild.items.size() > 0}" >
+    <div th:unless="${msgbuild.items.size() > 0}">
         <span>Ваш список рассылки пуст</span>
     </div>
 
-    <div th:if="${msgbuild.getItems().size() > 0}" >
+    <div th:if="${msgbuild.getItems().size() > 0}">
+        <!-- таблица управляющая-->
+        <table class="table caption-top table-striped">
+            <caption>Список рассылки</caption>
+            <thead class="thead-light">
+            <tr>
+                <th>ID</th>
+                <th>ДЗО</th>
+                <th>Сообщение</th>
+                <th>Кому</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="mi, itrStat : ${msgbuild.getItems()}">
+                <td th:text="${mi.getId()}">2</td>
+                <td th:text="${mi.getMailing().getCompany().getShortName()}">company_2</td>
+                <td></td>
+                <td colspan="3" >
+                    <table class="table mb-0">
+                        <tbody>
+                        <tr th:each="c : ${mi.getMailing().contactTo}">
+                            <td>TO</td>
+                            <td th:text="${c.email}">C1@gmail.com</td>
+                            <td th:text="${c.lastName}">C1</td>
+                        </tr>
+                        <tr th:each="c : ${mi.getMailing().contactCopy}">
+                            <td>COPY</td>
+                            <td th:text="${c.email}">C1@gmail.com</td>
+                            <td th:text="${c.lastName}">C1</td>
+                        </tr>
+                        <tr th:each="c : ${mi.getMailing().contactBcc}">
+                            <td>BCC</td>
+                            <td th:text="${c.email}">C1@gmail.com</td>
+                            <td th:text="${c.lastName}">C1</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </td>
+                <td colspan="1">
+                <td>
+                    <a class="btn btn-success"
+                       th:href="@{/msgbuid/edit/{mailing_id}(mailing_id = ${mi.mailing.id})}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                             class="bi bi-arrow-down-left-square" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                  d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm10.096 3.146a.5.5 0 1 1 .707.708L6.707 9.95h2.768a.5.5 0 1 1 0 1H5.5a.5.5 0 0 1-.5-.5V6.475a.5.5 0 1 1 1 0v2.768l4.096-4.097z"/>
+                        </svg>
+                    </a>
+                    <a class="btn btn-danger"
+                       th:href="@{/msgbuid/remove/{mailing_id}(mailing_id = ${mi.mailing.id})}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                             class="bi bi-trash" viewBox="0 0 16 16">
+                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                            <path fill-rule="evenodd"
+                                  d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                        </svg>
+                    </a>
+                </td>
+                </td>
+            </tr>
+            <tr>
+                <td/>
+                <td/>
+                <td/>
+                <td>Итого в рассылке:</td>
+                <td th:text="${msgbuild.totalQuantity}"/>
+            </tr>
+            </tbody>
+        </table>
 
-
-        <a sec:authorize="isAuthenticated()" type="button" class="btn btn-primary" th:href="@{messages/message/prepare}" th:if="${msgbuild.items.size() > 0}">Подготовить сообщение</a>
-        <a sec:authorize="isAnonymous()" type="button" class="btn btn-primary" data-toggle="modal" data-target="#authWarningModal">Подготовить сообщение</a>
+        <!-- кнопки для отправки рассылки на подготовку сообщения-->
+        <a sec:authorize="isAuthenticated()" type="button" class="btn btn-primary" th:href="@{messages/message/prepare}"
+           th:if="${msgbuild.items.size() > 0}">Подготовить сообщение</a>
+        <a sec:authorize="isAnonymous()" type="button" class="btn btn-primary" data-toggle="modal"
+           data-target="#authWarningModal">Подготовить сообщение</a>
 
     </div>
 

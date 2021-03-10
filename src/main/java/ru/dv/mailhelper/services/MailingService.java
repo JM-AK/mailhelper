@@ -34,24 +34,4 @@ public class MailingService {
         return mailingRepository.findById(id);
     }
 
-    public Mailing updateContacts(Mailing mailing, Contact contact, String addressType) {
-
-        if(addressType.equals(MsgAddressType.TO.toString())) {
-            Collection<Contact> oldContact = mailing.getContactTo();
-            oldContact.add(contact);
-            mailing.setContactTo(oldContact);
-        }
-        if(addressType.equals(MsgAddressType.COPY.toString())) {
-            Collection<Contact> oldContact = mailing.getContactTo();
-            oldContact.add(contact);
-            mailing.setContactCopy(oldContact);
-        }
-        if(addressType.equals(MsgAddressType.BCC.toString())) {
-            Collection<Contact> oldContact = mailing.getContactTo();
-            oldContact.add(contact);
-            mailing.setContactBcc(oldContact);
-        }
-        return mailingRepository.save(mailing);
-    }
-
 }

@@ -55,21 +55,9 @@ public class MailingController {
         return "edit-mailing-page";
     }
 
-    @GetMapping("/edit/add_contact")
-    public String addContact(@ModelAttribute Mailing mailing,
-                             @RequestParam(name = "newContact") Long contactId,
-                             @RequestParam(name = "newContactType") String addressType,
-                             HttpServletRequest request
-    ) throws NotFoundException {
-        Contact contact = contactService.findById(contactId).orElseThrow(() -> new NotFoundException("Нет такого контакта"));
-        mailingService.updateContacts(mailing, contact, addressType);
-        String referrer = request.getHeader("referer");
-        return "redirect:/";
-    }
-
     @PostMapping("/edit")
     public String editMailing(@ModelAttribute Mailing mailing){
         mailingService.saveMailing(mailing);
-        return "redirect:/";
+        return "redirect:/mailing";
     }
 }

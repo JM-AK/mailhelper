@@ -2,6 +2,7 @@ package ru.dv.mailhelper.entities;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SortComparator;
 import org.hibernate.type.SortedMapType;
 import ru.dv.mailhelper.enums.MsgAddressType;
@@ -15,6 +16,7 @@ import java.util.Map;
 @Data
 @NoArgsConstructor
 @Table(name = "mailings")
+@DynamicUpdate
 public class Mailing {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

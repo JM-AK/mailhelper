@@ -28,9 +28,16 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
 
+
+                <li sec:authorize="isAuthenticated()" class="nav-item"
+                    th:classappend="${activeTab == 'Message' ? 'active' : ''}">
+                    <a class="nav-link" th:href="@{/message}">Сообщения<span
+                            class="sr-only"></span></a>
+                </li>
+
                 <li sec:authorize="isAuthenticated()" class="nav-item"
                     th:classappend="${activeTab == 'Mailing' ? 'active' : ''}">
-                    <a class="nav-link" th:href="@{/mailing}">Рассылка<span
+                    <a class="nav-link" th:href="@{/mailing}">Рассылки<span
                             class="sr-only"></span></a>
                 </li>
 

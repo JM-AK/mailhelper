@@ -34,4 +34,7 @@ public class MailingService {
         return mailingRepository.findById(id);
     }
 
+    public void deleteMailingById(Long id) {
+        mailingRepository.deleteById(id);
+    }
 }

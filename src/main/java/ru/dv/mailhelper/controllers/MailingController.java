@@ -4,6 +4,7 @@ import javassist.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -60,4 +61,15 @@ public class MailingController {
         mailingService.saveMailing(mailing);
         return "redirect:/mailing";
     }
+
+    @PostMapping("/delete/{id}")
+    public String deleteMailing(@PathVariable Long id) throws NotFoundException {
+        logger.info("Try to deleye mailing woth id: " + id);
+        if(mailingService.findById(id).isEmpty()) {
+          throw new NotFoundException(String.format("Mailing with id=%s doesn't exists", id));
+        }
+        mailingService.deleteMailingById(id);
+        return "redirect:/mailing";
+    }
+
 }

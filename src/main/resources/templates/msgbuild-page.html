@@ -35,9 +35,11 @@
                 <th>ID</th>
                 <th>ДЗО</th>
                 <th>Сообщение</th>
+                <th></th>
                 <th>Кому</th>
                 <th></th>
                 <th></th>
+                <th>Управление</th>
                 <th></th>
             </tr>
             </thead>
@@ -45,9 +47,30 @@
             <tr th:each="mi, itrStat : ${msgbuild.getItems()}">
                 <td th:text="${mi.getId()}">2</td>
                 <td th:text="${mi.getMailing().getCompany().getShortName()}">company_2</td>
-                <td></td>
-                <td colspan="3" >
-                    <table class="table mb-0">
+                <td>
+                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseMIText" role="button"
+                       aria-expanded="false" aria-controls="collapseMIText">
+                        Сообщение
+                    </a>
+                </td>
+
+                <td colspan="1">
+                    <table class="table mb-0" id="collapseMIText">
+                        <tbody>
+                        <tr> <td th:text="${mi.subject}">предмет</td></tr>
+                        <tr><td th:text="${mi.body}">тело</td></tr>
+                        </tbody>
+                    </table>
+                </td>
+
+                <td colspan="1">
+                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseMIContactList" role="button"
+                       aria-expanded="false" aria-controls="collapseMIContactList">
+                        Контакты
+                    </a>
+                </td>
+                <td colspan="1">
+                    <table class="table mb-0" id="collapseMIContactList">
                         <tbody>
                         <tr th:each="c : ${mi.getMailing().contactTo}">
                             <td>TO</td>

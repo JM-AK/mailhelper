@@ -31,7 +31,7 @@
 
                 <li sec:authorize="isAuthenticated()" class="nav-item"
                     th:classappend="${activeTab == 'Message' ? 'active' : ''}">
-                    <a class="nav-link" th:href="@{/message}">Сообщения<span
+                    <a class="nav-link" th:href="@{/msgbuild}">Создать сообщение<span
                             class="sr-only"></span></a>
                 </li>
 

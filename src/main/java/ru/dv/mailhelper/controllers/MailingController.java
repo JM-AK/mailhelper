@@ -1,6 +1,5 @@
 package ru.dv.mailhelper.controllers;
 
-import javassist.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.dv.mailhelper.entities.Mailing;
 import ru.dv.mailhelper.enums.MsgAddressType;
+import ru.dv.mailhelper.exceptions.MailingNotFoundException;
 import ru.dv.mailhelper.services.ContactService;
 import ru.dv.mailhelper.services.MailingService;
 
@@ -60,10 +60,10 @@ public class MailingController {
     }
 
     @PostMapping("/delete/{id}")
-    public String deleteMailing(@PathVariable Long id) throws NotFoundException {
+    public String deleteMailing(@PathVariable Long id) throws MailingNotFoundException {
         logger.info("Try to deleye mailing woth id: " + id);
         if(mailingService.findById(id).isEmpty()) {
-          throw new NotFoundException(String.format("Mailing with id=%s doesn't exists", id));
+          throw new MailingNotFoundException(String.format("Mailing with id=%s doesn't exists", id));
         }
         mailingService.deleteMailingById(id);
         return "redirect:/mailing";

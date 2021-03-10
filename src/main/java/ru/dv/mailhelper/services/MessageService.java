@@ -2,7 +2,7 @@ package ru.dv.mailhelper.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.dv.mailhelper.beans.MessageBuilder;
+import ru.dv.mailhelper.beans.MsgBuild;
 import ru.dv.mailhelper.entities.Message;
 import ru.dv.mailhelper.entities.MessageItem;
 import ru.dv.mailhelper.repositories.MessageRepository;
@@ -33,11 +33,11 @@ public class MessageService {
     }
 
     @Transactional
-    public Message createMessage(MessageBuilder messageBuilder) {
+    public Message createMessage(MsgBuild msgBuild) {
         Message message = new Message();
         message.setId(0L);
-        message.setMessageItems(new ArrayList<>(messageBuilder.getItems()));
-        for (MessageItem mi : messageBuilder.getItems()) {
+        message.setMessageItems(new ArrayList<>(msgBuild.getItems()));
+        for (MessageItem mi : msgBuild.getItems()) {
             mi.setMessage(message);
         }
         return message;

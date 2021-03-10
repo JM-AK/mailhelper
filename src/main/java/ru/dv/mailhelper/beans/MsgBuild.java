@@ -15,11 +15,11 @@ import java.util.List;
 @Component
 @Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)
 @Data
-public class MessageBuilder {
+public class MsgBuild {
     private List<MessageItem> items;
     private Integer totalQuantity;
 
-    public MessageBuilder() {
+    public MsgBuild() {
         items = new ArrayList<>();
         totalQuantity = 0;
     }

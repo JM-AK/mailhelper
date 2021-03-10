@@ -2,11 +2,15 @@ package ru.dv.mailhelper.entities;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
-@Table(name = "orders")
+@Table(name = "messages")
 @Data
 @NoArgsConstructor
 public class Message {
@@ -15,6 +19,15 @@ public class Message {
     @Column(name = "id")
     private Long id;
 
+    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "message", fetch = FetchType.EAGER)
+    private List<MessageItem> messageItems;
 
+    @Column(name = "create_at", nullable=false, updatable = false )
+    @CreationTimestamp
+    private LocalDateTime createAt;
+
+    @Column(name = "update_at")
+    @UpdateTimestamp
+    private LocalDateTime updateAt;
 
 }

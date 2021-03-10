@@ -1,15 +1,20 @@
 package ru.dv.mailhelper.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SortComparator;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.type.SortedMapType;
 import ru.dv.mailhelper.enums.MsgAddressType;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 @Entity
@@ -49,6 +54,17 @@ public class Mailing {
     )
     private Collection<Contact> contactBcc;
 
+    @OneToMany(mappedBy = "mailing")
+    @JsonIgnore
+    private List<MessageItem> messageItems;
+
+    @Column(name = "create_at", nullable=false, updatable = false )
+    @CreationTimestamp
+    private LocalDateTime createAt;
+
+    @Column(name = "update_at")
+    @UpdateTimestamp
+    private LocalDateTime updateAt;
 
 
 }

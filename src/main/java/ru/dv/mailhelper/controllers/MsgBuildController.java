@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ru.dv.mailhelper.beans.MsgBuild;
 import ru.dv.mailhelper.entities.Mailing;
@@ -64,9 +61,18 @@ public class MsgBuildController {
     @GetMapping("/edit/{mailing_id}")
     public String showEditMailingItemPage(@PathVariable(value = "mailing_id") Long mailingId, Model model){
         logger.info("Edit mailing_item with mailingId {}", mailingId);
-        MessageItem mi = msgBuild.findMessageItemByMailingId(mailingId);
-        model.addAttribute("message_item", mi);
+        MessageItem miDTO = msgBuild.findMessageItemByMailingId(mailingId);
+        model.addAttribute("message_item", miDTO);
         return "edit-message_item-page";
+    }
+
+    @PostMapping("/edit")
+    public String showEditMailingItemPage(@ModelAttribute(name = "message_item") MessageItem miDTO, Model model){
+        MessageItem mi = msgBuild.findMessageItemByMailingId(miDTO.getMailing().getId());
+        mi.setSubject(miDTO.getSubject());
+        mi.setBody(miDTO.getBody());
+        mi.setAttachmentList(miDTO.getAttachmentList());
+        return "redirect:/msgbuild";
     }
 
     @ExceptionHandler

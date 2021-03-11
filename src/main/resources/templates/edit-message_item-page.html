@@ -34,55 +34,23 @@
                     </h4>
                 </header>
                 <article class="card-body">
-                    <form th:action="@{/msgbuild/edit}" th:object="${message_item}" th:method="put"
+                    <form th:action="@{/msgbuild/edit}" th:object="${message_item}" th:method="POST"
                           enctype="multipart/form-data">
                         <input th:field="*{id}" type="hidden" class="form-control">
+                        <input th:field="*{mailing.id}" type="hidden" class="form-control">
                         <div class="form-row">
                             <div class="mb-3">
-                                <label>Сокращенное наименование Компании</label>
-                                <input th:field="*{company.shortName}" type="text" class="form-control" placeholder="">
+                                <label>Тема сообщения</label>
+                                <input class="form-control" type="text" th:field="*{subject}" placeholder="">
                             </div>
                             <div class="mb-3">
-                                <label>Полное наименование Компании</label>
-                                <input th:field="*{company.fullName}" type="text" class="form-control" placeholder="">
+                                <label>Тело сообщения</label>
+                                <textarea class="form-control" rows="3" th:field="*{body}"></textarea>
                             </div>
                         </div>
 
-                        <!-- текущий список контактов-->
-                        <div class="list-group">
-                            <label>TO</label>
-                            <table>
-                                <thead class="thead-light">
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Имя</th>
-                                    <th>Email</th>
-                                    <th>TO</th>
-                                    <th>COPY</th>
-                                    <th>BCC</th>
-                                </tr>
-                                </thead>
-                                <body>
-                                <tr th:each="contact : ${contacts}">
-                                    <td th:text="${contact.id}"></td>
-                                    <td th:text="${contact.lastName}"></td>
-                                    <td th:text="${contact.email}"></td>
-                                    <td>
-                                        <input class="form-check-input me-1" type="checkbox" th:field="*{contactTo}"
-                                               th:value="${contact.id}" th:selected="${mailing.contactTo?.contains(contact)}">
-                                    </td>
-                                    <td>
-                                        <input class="form-check-input me-1" type="checkbox" th:field="*{contactCopy}"
-                                               th:value="${contact.id}" th:selected="${mailing.contactCopy?.contains(contact)}">
-                                    </td>
-                                    <td>
-                                        <input class="form-check-input me-1" type="checkbox" th:field="*{contactBcc}"
-                                               th:value="${contact.id}" th:selected="${mailing.contactBcc?.contains(contact)}">
-                                    </td>
-                                </tr>
-                                </body>
-                            </table>
-                        </div>
+                        <!-- вложения ToDo-->
+
 
                         <div class="form-group">
                             <button class="btn btn-primary btn-block" type="submit"

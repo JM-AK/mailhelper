@@ -3,14 +3,13 @@ package ru.dv.mailhelper.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.annotations.SortComparator;
-import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.annotations.*;
 import org.hibernate.type.SortedMapType;
 import ru.dv.mailhelper.enums.MsgAddressType;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Collections;
@@ -33,6 +32,19 @@ public class Mailing {
                          @AttributeOverride(name = "fullName", column = @Column(name = "company_legalname"))})
     private Company company;
 
+
+//    @ElementCollection
+//    @CollectionTable(name = "mailings_contacts_mapping",
+//            joinColumns = @JoinColumn(name = "mailing_id", referencedColumnName = "id")
+//    )
+//    @MapKeyJoinColumn(name = "contact_id")
+//    @Column(name = "address_type")
+//    @Enumerated(EnumType.STRING)
+//    @OrderColumn(name = "PK_MAILINGS_CONTACTS_MAPPING")
+//    private Map<Contact, MsgAddressType> contactFields;
+
+
+    @Fetch(FetchMode.SUBSELECT)
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "mailings_contacts_to_mapping",
                     joinColumns = @JoinColumn(name = "mailing_id", referencedColumnName = "id"),
@@ -40,19 +52,22 @@ public class Mailing {
     )
     private Collection<Contact> contactTo;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @Fetch(FetchMode.SUBSELECT)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "mailings_contacts_copy_mapping",
             joinColumns = @JoinColumn(name = "mailing_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "contact_id", referencedColumnName = "id")
     )
     private Collection<Contact> contactCopy;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @Fetch(FetchMode.SUBSELECT)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "mailings_contacts_bcc_mapping",
             joinColumns = @JoinColumn(name = "mailing_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "contact_id", referencedColumnName = "id")
     )
     private Collection<Contact> contactBcc;
+
 
     @OneToMany(mappedBy = "mailing")
     @JsonIgnore

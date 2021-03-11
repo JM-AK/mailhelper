@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import ru.dv.mailhelper.beans.MsgBuild;
 import ru.dv.mailhelper.entities.Mailing;
+import ru.dv.mailhelper.entities.MessageItem;
 import ru.dv.mailhelper.exceptions.MailingNotFoundException;
 import ru.dv.mailhelper.exceptions.ResourceNotFoundException;
 import ru.dv.mailhelper.services.MailingService;
@@ -60,6 +61,14 @@ public class MsgBuildController {
         return "redirect:/msgbuild";
     }
 
+    @GetMapping("/edit/{mailing_id}")
+    public String showEditMailingItemPage(@PathVariable(value = "mailing_id") Long mailingId, Model model){
+        logger.info("Edit mailing_item with mailingId {}", mailingId);
+        MessageItem mi = msgBuild.findMessageItemByMailingId(mailingId);
+        model.addAttribute("mailing_item", mi);
+        return "msgbuild-edit-page";
+    }
+
     @ExceptionHandler
     public ModelAndView notFoundExceptionHandler(ResourceNotFoundException ex){
         ModelAndView modelAndView = new ModelAndView("not found page");
@@ -75,6 +84,8 @@ public class MsgBuildController {
         }
         return msgBuild;
     }
+
+
 
 
 }

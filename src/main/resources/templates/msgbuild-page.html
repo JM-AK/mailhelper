@@ -48,13 +48,13 @@
                 <td th:text="${itrStat.index+1}">1</td>
                 <td th:text="${mi.getMailing().getCompany().getShortName()}">company_2</td>
                 <td>
-                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseMIText" role="button"
+                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMIText"
                        aria-expanded="false" aria-controls="collapseMIText">
                         Сообщение
-                    </a>
+                    </button>
                 </td>
 
-                <td colspan="1">
+                <td colspan="1" >
                     <table class="table mb-0" id="collapseMIText">
                         <tbody>
                         <tr> <td th:text="${mi.subject}">предмет</td></tr>
@@ -67,10 +67,10 @@
                 </td>
 
                 <td colspan="1">
-                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseMIContactList" role="button"
+                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse"  data-bs-target="#collapseMIContactList"
                        aria-expanded="false" aria-controls="collapseMIContactList">
                         Контакты
-                    </a>
+                    </button>
                 </td>
                 <td colspan="1">
                     <table class="table mb-0" id="collapseMIContactList">

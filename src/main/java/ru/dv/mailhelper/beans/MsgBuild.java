@@ -25,7 +25,7 @@ public class MsgBuild {
     }
 
     public void add(Mailing m, String subject, String body) {
-        MessageItem messageItem = findMessageFromMailing(m);
+        MessageItem messageItem = findMessageItemByMailing(m);
         if (messageItem == null) {
             messageItem = new MessageItem();
             messageItem.setMailing(m);
@@ -56,8 +56,12 @@ public class MsgBuild {
         }
     }
 
-    private MessageItem findMessageFromMailing(Mailing m) {
+    private MessageItem findMessageItemByMailing(Mailing m) {
         return items.stream().filter(o -> o.getMailing().getId().equals(m.getId())).findFirst().orElse(null);
+    }
+
+    public MessageItem findMessageItemByMailingId(Long id) {
+        return items.stream().filter(o -> o.getMailing().getId().equals(id)).findFirst().orElse(null);
     }
 
 }

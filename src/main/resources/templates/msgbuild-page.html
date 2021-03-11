@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8"/>
 
-    <title>Настройка рассылки</title>
+    <title>Рассылка</title>
 
     <link rel="icon" type="image/png" th:href="@{/favicon.ico}"/>
 
@@ -45,7 +45,7 @@
             </thead>
             <tbody>
             <tr th:each="mi, itrStat : ${msgbuild.getItems()}">
-                <td th:text="${mi.getId()}">2</td>
+                <td th:text="${itrStat.index+1}">1</td>
                 <td th:text="${mi.getMailing().getCompany().getShortName()}">company_2</td>
                 <td>
                     <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseMIText" role="button"

@@ -31,13 +31,13 @@
 
                 <li sec:authorize="isAuthenticated()" class="nav-item"
                     th:classappend="${activeTab == 'MsgBuild' ? 'active' : ''}">
-                    <a class="nav-link" th:href="@{/msgbuild}">Создать сообщение<span
+                    <a class="nav-link" th:href="@{/msgbuild}">Рассылка<span
                             class="sr-only"></span></a>
                 </li>
 
                 <li sec:authorize="isAuthenticated()" class="nav-item"
                     th:classappend="${activeTab == 'Mailing' ? 'active' : ''}">
-                    <a class="nav-link" th:href="@{/mailing}">Рассылки<span
+                    <a class="nav-link" th:href="@{/mailing}">Настройка адресов<span
                             class="sr-only"></span></a>
                 </li>
 

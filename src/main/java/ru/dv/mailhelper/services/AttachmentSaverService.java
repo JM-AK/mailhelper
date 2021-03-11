@@ -10,13 +10,13 @@ import java.util.UUID;
 
 @Service
 public class AttachmentSaverService {
-    private static final String UPLOADED_FOLDER = "./attachments/";
+    private static final String UPLOADED_FOLDER = "";
 
     public String saveFile(MultipartFile file) {
         if (file.isEmpty()) {
             return "";
         }
-        String fileName = UUID.randomUUID().toString() + file.getOriginalFilename();
+        String fileName = UUID.randomUUID().toString() + file.getName();
         try {
             Path path = Paths.get(UPLOADED_FOLDER + fileName);
             file.transferTo(path);

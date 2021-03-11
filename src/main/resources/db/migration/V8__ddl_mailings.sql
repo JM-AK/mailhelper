@@ -3,7 +3,11 @@ DROP TABLE IF EXISTS mailings;
 CREATE TABLE mailings
 (
     id                BIGINT(11) NOT NULL AUTO_INCREMENT,
-    company_name      VARCHAR(50) DEFAULT NULL,
-    company_legalname VARCHAR(50) DEFAULT NULL,
+    company_name      VARCHAR(50)         DEFAULT NULL,
+    company_legalname VARCHAR(50)         DEFAULT NULL,
+    create_at         TIMESTAMP  NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    update_at         TIMESTAMP  NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT PK_Mailings__id PRIMARY KEY (id)
-)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=UTF8MB4;
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  DEFAULT CHARSET = UTF8MB4;

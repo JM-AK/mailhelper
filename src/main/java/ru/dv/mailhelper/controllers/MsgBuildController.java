@@ -65,8 +65,8 @@ public class MsgBuildController {
     public String showEditMailingItemPage(@PathVariable(value = "mailing_id") Long mailingId, Model model){
         logger.info("Edit mailing_item with mailingId {}", mailingId);
         MessageItem mi = msgBuild.findMessageItemByMailingId(mailingId);
-        model.addAttribute("mailing_item", mi);
-        return "msgbuild-edit-page";
+        model.addAttribute("message_item", mi);
+        return "edit-message_item-page";
     }
 
     @ExceptionHandler

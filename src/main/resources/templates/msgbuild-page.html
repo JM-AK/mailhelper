@@ -75,21 +75,23 @@
                 <td colspan="1">
                     <table class="table mb-0" id="collapseMIContactList">
                         <tbody>
-                        <tr th:each="c : ${mi.getMailing().contactTo}">
+                        <tr th:each="c : ${mi.mailing.contactTo}">
                             <td>TO</td>
                             <td th:text="${c.email}">C1@gmail.com</td>
                             <td th:text="${c.lastName}">C1</td>
                         </tr>
-                        <tr th:each="c : ${mi.getMailing().contactCopy}">
+                     <!--
+                        <tr th:each="c : ${mi.mailing.contactCopy}">
                             <td>COPY</td>
                             <td th:text="${c.email}">C1@gmail.com</td>
                             <td th:text="${c.lastName}">C1</td>
                         </tr>
-                        <tr th:each="c : ${mi.getMailing().contactBcc}">
+                        <tr th:each="c : ${mi.mailing.contactBcc}">
                             <td>BCC</td>
                             <td th:text="${c.email}">C1@gmail.com</td>
                             <td th:text="${c.lastName}">C1</td>
                         </tr>
+                        -->
                         </tbody>
                     </table>
                 </td>

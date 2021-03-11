@@ -2,6 +2,7 @@ package ru.dv.mailhelper.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.dv.mailhelper.entities.Contact;
 import ru.dv.mailhelper.entities.Mailing;
 import ru.dv.mailhelper.enums.MsgAddressType;
@@ -28,7 +29,6 @@ public class MailingService {
     public Mailing saveMailing(Mailing mailing) {
         return mailingRepository.save(mailing);
     }
-
 
     public Optional<Mailing> findById(Long id) {
         return mailingRepository.findById(id);

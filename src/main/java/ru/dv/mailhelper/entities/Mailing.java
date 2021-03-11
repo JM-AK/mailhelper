@@ -33,21 +33,21 @@ public class Mailing {
                          @AttributeOverride(name = "fullName", column = @Column(name = "company_legalname"))})
     private Company company;
 
-    @OneToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "mailings_contacts_to_mapping",
                     joinColumns = @JoinColumn(name = "mailing_id", referencedColumnName = "id"),
                     inverseJoinColumns = @JoinColumn(name = "contact_id", referencedColumnName = "id")
     )
     private Collection<Contact> contactTo;
 
-    @OneToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "mailings_contacts_copy_mapping",
             joinColumns = @JoinColumn(name = "mailing_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "contact_id", referencedColumnName = "id")
     )
     private Collection<Contact> contactCopy;
 
-    @OneToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "mailings_contacts_bcc_mapping",
             joinColumns = @JoinColumn(name = "mailing_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "contact_id", referencedColumnName = "id")

@@ -8,11 +8,11 @@ CREATE TABLE mailings_contacts_to_mapping
 
     PRIMARY KEY (mailing_id, contact_id, address_type),
 
-    CONSTRAINT FK_MAILINGS_CONTACTS_TO_MAPPING__MAILINGS__ID FOREIGN KEY (mailing_id)
+    CONSTRAINT FK_Mailings_contacts_to_mapping__Mailings__id FOREIGN KEY (mailing_id)
         REFERENCES mailings (id)
         ON DELETE NO ACTION ON UPDATE NO ACTION,
 
-    CONSTRAINT FK_MAILINGS_CONTACTS_TO_MAPPING__CONTACTS__ID FOREIGN KEY (contact_id)
+    CONSTRAINT FK_Mailings_contacts_to_mapping__Contacts__id FOREIGN KEY (contact_id)
         REFERENCES contacts (id)
         ON DELETE NO ACTION ON UPDATE NO ACTION
 

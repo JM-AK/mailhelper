@@ -16,11 +16,19 @@ import java.util.UUID;
 @Component
 public class FileStoreService implements IFileStoreService {
 
-    @Autowired
-    IFileSystemProvider systemProvider;
+    private IFileSystemProvider systemProvider;
+
+    private IFileMetaProvider fileMetaProvider;
 
     @Autowired
-    IFileMetaProvider fileMetaProvider;
+    public void setSystemProvider(IFileSystemProvider systemProvider) {
+        this.systemProvider = systemProvider;
+    }
+
+    @Autowired
+    public void setFileMetaProvider(IFileMetaProvider fileMetaProvider) {
+        this.fileMetaProvider = fileMetaProvider;
+    }
 
     @Override
     public String storeFile(byte[] content, String fileName, int subFileType) throws IOException, NoSuchAlgorithmException {

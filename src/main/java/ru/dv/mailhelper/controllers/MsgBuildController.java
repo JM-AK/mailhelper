@@ -20,6 +20,7 @@ import ru.dv.mailhelper.services.MailingService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 
 @Controller
 @RequestMapping("/msgbuild")
@@ -76,13 +77,14 @@ public class MsgBuildController {
     }
 
     @PostMapping("/edit")
-    public String showEditMailingItemPage(@ModelAttribute(name = "message_item") MessageItem miDTO, @RequestParam("file") MultipartFile file){
+    public String showEditMailingItemPage(@ModelAttribute(name = "message_item") MessageItem miDTO, @RequestParam("file") MultipartFile file) throws IOException {
         MessageItem mi = msgBuild.findMessageItemByMailingId(miDTO.getMailing().getId());
         mi.setSubject(miDTO.getSubject());
         mi.setBody(miDTO.getBody());
 
         if (!file.isEmpty()) {
-            String pathToSavedFile = attachmentSaverService.saveFile(file);
+            String pathToSavedFile = attachmentSaverService.saveNotCryptedFileName(file);
+            logger.info(pathToSavedFile);
             Attachment attachment = new Attachment();
             attachment.setPath(pathToSavedFile);
             attachment.setMessageItem(mi);

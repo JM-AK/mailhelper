@@ -7,12 +7,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import ru.dv.mailhelper.beans.MsgBuild;
+import ru.dv.mailhelper.entities.Attachment;
 import ru.dv.mailhelper.entities.Mailing;
 import ru.dv.mailhelper.entities.MessageItem;
 import ru.dv.mailhelper.exceptions.MailingNotFoundException;
 import ru.dv.mailhelper.exceptions.ResourceNotFoundException;
+import ru.dv.mailhelper.services.AttachmentSaverService;
 import ru.dv.mailhelper.services.MailingService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,6 +26,7 @@ import javax.servlet.http.HttpSession;
 public class MsgBuildController {
     private MailingService mailingService;
     private MsgBuild msgBuild;
+    private AttachmentSaverService attachmentSaverService;
 
     private static final Logger logger = LoggerFactory.getLogger(MsgBuildController.class);
 
@@ -34,6 +38,11 @@ public class MsgBuildController {
     @Autowired
     public void setMsgBuild(MsgBuild msgBuild) {
         this.msgBuild = msgBuild;
+    }
+
+    @Autowired
+    public void setAttachmentSaverService(AttachmentSaverService attachmentSaverService) {
+        this.attachmentSaverService = attachmentSaverService;
     }
 
     @GetMapping
@@ -67,11 +76,18 @@ public class MsgBuildController {
     }
 
     @PostMapping("/edit")
-    public String showEditMailingItemPage(@ModelAttribute(name = "message_item") MessageItem miDTO, Model model){
+    public String showEditMailingItemPage(@ModelAttribute(name = "message_item") MessageItem miDTO, @RequestParam("file") MultipartFile file){
         MessageItem mi = msgBuild.findMessageItemByMailingId(miDTO.getMailing().getId());
         mi.setSubject(miDTO.getSubject());
         mi.setBody(miDTO.getBody());
-        mi.setAttachmentList(miDTO.getAttachmentList());
+
+        if (!file.isEmpty()) {
+            String pathToSavedFile = attachmentSaverService.saveFile(file);
+            Attachment attachment = new Attachment();
+            attachment.setPath(pathToSavedFile);
+            attachment.setMessageItem(mi);
+            mi.addAttachment(attachment);
+        }
         return "redirect:/msgbuild";
     }
 

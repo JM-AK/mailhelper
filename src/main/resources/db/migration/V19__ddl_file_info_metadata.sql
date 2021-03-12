@@ -7,6 +7,7 @@ CREATE TABLE file_info_metadata
     hash VARCHAR(250) NOT NULL,
     file_name VARCHAR(250) NOT NULL,
     sub_type VARCHAR(50) NOT NULL,
+    load_date TIMESTAMP  NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (hash)
 
 ) ENGINE = InnoDB

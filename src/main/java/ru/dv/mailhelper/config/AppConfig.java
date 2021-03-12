@@ -1,5 +1,6 @@
 package ru.dv.mailhelper.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -9,6 +10,8 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
+import org.sql2o.Sql2o;
+import ru.dv.mailhelper.repositories.FileMetaProvider;
 
 import java.util.Locale;
 
@@ -30,6 +33,14 @@ public class AppConfig implements WebMvcConfigurer {
         localeChangeInterceptor.setParamName("lang");
         return localeChangeInterceptor;
     }
+
+
+
+//    @Bean
+//    public FileMetaProvider fileMetaProvider(@Autowired Sql2o sql2o) {
+//        FileMetaProvider fileMetaProvider = new FileMetaProvider(sql2o);
+//        return fileMetaProvider;
+//    }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {

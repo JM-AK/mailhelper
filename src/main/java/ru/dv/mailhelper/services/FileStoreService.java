@@ -4,6 +4,8 @@ import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.dv.mailhelper.entities.dtos.FileMetaDTO;
+import ru.dv.mailhelper.repositories.FileMetaProvider;
+import ru.dv.mailhelper.repositories.FileSystemProvider;
 import ru.dv.mailhelper.repositories.interfaces.IFileMetaProvider;
 import ru.dv.mailhelper.repositories.interfaces.IFileSystemProvider;
 import ru.dv.mailhelper.utils.HashHelper;

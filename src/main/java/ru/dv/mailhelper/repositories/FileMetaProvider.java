@@ -24,7 +24,7 @@ public class FileMetaProvider implements IFileMetaProvider {
 
     private final Sql2o sql2o;
 
-    public FileMetaProvider(Sql2o sql2o) {
+    public FileMetaProvider(@Autowired Sql2o sql2o) {
         this.sql2o = sql2o;
     }
 

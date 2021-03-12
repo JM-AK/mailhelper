@@ -13,13 +13,13 @@ import java.util.UUID;
 @Repository
 public class FileMetaProvider implements IFileMetaProvider {
 
-    private static final String GET_FILES_META = "select hash, file_name as filename from vma.file_info_metadata" +
+    private static final String GET_FILES_META = "select hash, file_name as filename from file_info_metadata" +
             " where sub_type =:subtype";
 
-    private static final String GET_FILE_PATH_BY_HASH = "select file_name as filename from vma.file_info_metadata" +
+    private static final String GET_FILE_PATH_BY_HASH = "select file_name as filename from file_info_metadata" +
             " where hash =:hash";
 
-    private static final String SAVE_FILE_META_DATA = "insert into vma.file_info_metadata (hash, file_name, sub_type)" +
+    private static final String SAVE_FILE_META_DATA = "insert into file_info_metadata (hash, file_name, sub_type)" +
             " values (:hash, :file_name, :subtype)";
 
     private final Sql2o sql2o;

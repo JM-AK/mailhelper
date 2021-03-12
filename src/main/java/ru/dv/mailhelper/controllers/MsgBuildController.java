@@ -22,6 +22,7 @@ import ru.dv.mailhelper.services.MailingService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 
 @Controller
 @RequestMapping("/msgbuild")
@@ -84,7 +85,7 @@ public class MsgBuildController {
     }
 
     @PostMapping("/edit")
-    public String showEditMailingItemPage(@ModelAttribute(name = "message_item") MessageItem miDTO, @RequestParam("file") MultipartFile file) throws IOException {
+    public String showEditMailingItemPage(@ModelAttribute(name = "message_item") MessageItem miDTO, @RequestParam("file") MultipartFile file) throws IOException, NoSuchAlgorithmException {
         MessageItem mi = msgBuild.findMessageItemByMailingId(miDTO.getMailing().getId());
         mi.setSubject(miDTO.getSubject());
         mi.setBody(miDTO.getBody());
@@ -100,7 +101,7 @@ public class MsgBuildController {
 //            attachment.setMessageItem(mi);
 //            mi.addAttachment(attachment);
 
-            logger.info(attachmentSaverService.getExtension(file));
+            logger.info(fileStoreService.storeFile(file.getBytes(),file.getOriginalFilename(),1));
 
         }
         return "redirect:/msgbuild";

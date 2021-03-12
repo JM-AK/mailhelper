@@ -17,7 +17,7 @@ public class FileMetaProvider implements IFileMetaProvider {
             " where sub_type =:subtype";
 
     private static final String GET_FILE_PATH_BY_HASH = "select file_name as filename from file_info_metadata" +
-            " where hash =:hash";
+            " where hash = :hash";
 
     private static final String SAVE_FILE_META_DATA = "insert into file_info_metadata (hash, file_name, sub_type)" +
             " values (:hash, :file_name, :subtype)";
@@ -32,7 +32,7 @@ public class FileMetaProvider implements IFileMetaProvider {
     public String checkFileExists(UUID fileHash) {
        try(Connection connection = sql2o.open())  {
            return connection.createQuery(GET_FILE_PATH_BY_HASH, false)
-                   .addParameter("hash", fileHash)
+                   .addParameter("hash", fileHash.toString())
                    .executeScalar(String.class);
        }
     }
@@ -41,7 +41,7 @@ public class FileMetaProvider implements IFileMetaProvider {
     public void saveFileMeta(UUID Hash, String fileName, int subType) {
         try(Connection connection = sql2o.open())  {
             connection.createQuery(SAVE_FILE_META_DATA, false)
-                    .addParameter("hash", Hash)
+                    .addParameter("hash", Hash.toString())
                     .addParameter("file_name", fileName)
                     .addParameter("subtype", subType)
                     .executeUpdate();

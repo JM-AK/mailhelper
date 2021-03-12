@@ -2,8 +2,11 @@ package ru.dv.mailhelper.repositories;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import ru.dv.mailhelper.controllers.MsgBuildController;
 import ru.dv.mailhelper.repositories.interfaces.IFileSystemProvider;
 
 import javax.annotation.PostConstruct;
@@ -22,6 +25,8 @@ public class FileSystemProvider implements IFileSystemProvider {
     private String storeFolder;
 
     private Path storePath;
+
+
 
     @PostConstruct
     public void init() {

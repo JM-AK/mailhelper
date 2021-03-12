@@ -1,6 +1,8 @@
 package ru.dv.mailhelper.services;
 
 import org.apache.commons.io.FilenameUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.dv.mailhelper.entities.dtos.FileMetaDTO;
@@ -22,6 +24,8 @@ public class FileStoreService implements IFileStoreService {
 
     private IFileMetaProvider fileMetaProvider;
 
+    private static final Logger logger = LoggerFactory.getLogger(FileStoreService.class);
+
     @Autowired
     public void setSystemProvider(IFileSystemProvider systemProvider) {
         this.systemProvider = systemProvider;
@@ -35,6 +39,7 @@ public class FileStoreService implements IFileStoreService {
     @Override
     public String storeFile(byte[] content, String fileName, int subFileType) throws IOException, NoSuchAlgorithmException {
         final UUID md5 = HashHelper.getMd5Hash(content);
+        logger.info(String.valueOf(md5));
 
         String filename = fileMetaProvider.checkFileExists(md5);
         if (filename == null) {

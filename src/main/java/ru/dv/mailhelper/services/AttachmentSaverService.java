@@ -45,8 +45,8 @@ public class AttachmentSaverService {
             return "";
         }
         String fileName = file.getOriginalFilename();
-        String extension = new StringBuilder(fileName).substring(fileName.lastIndexOf(".") + 1);
-        return extension;
+
+        return new StringBuilder(fileName).substring(fileName.lastIndexOf(".") + 1);
     }
 
 }

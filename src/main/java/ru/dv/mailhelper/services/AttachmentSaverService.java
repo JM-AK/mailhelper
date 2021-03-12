@@ -40,4 +40,13 @@ public class AttachmentSaverService {
         return fileName;
     }
 
+    public String getExtension(MultipartFile file) {
+        if (file.isEmpty()) {
+            return "";
+        }
+        String fileName = file.getOriginalFilename();
+        String extension = new StringBuilder(fileName).substring(fileName.lastIndexOf(".") + 1);
+        return extension;
+    }
+
 }

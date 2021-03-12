@@ -16,6 +16,7 @@ import ru.dv.mailhelper.entities.MessageItem;
 import ru.dv.mailhelper.exceptions.MailingNotFoundException;
 import ru.dv.mailhelper.exceptions.ResourceNotFoundException;
 import ru.dv.mailhelper.services.AttachmentSaverService;
+import ru.dv.mailhelper.services.IFileStoreService;
 import ru.dv.mailhelper.services.MailingService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,6 +29,7 @@ public class MsgBuildController {
     private MailingService mailingService;
     private MsgBuild msgBuild;
     private AttachmentSaverService attachmentSaverService;
+    private IFileStoreService fileStoreService;
 
     private static final Logger logger = LoggerFactory.getLogger(MsgBuildController.class);
 
@@ -44,6 +46,11 @@ public class MsgBuildController {
     @Autowired
     public void setAttachmentSaverService(AttachmentSaverService attachmentSaverService) {
         this.attachmentSaverService = attachmentSaverService;
+    }
+
+    @Autowired
+    public void setFileStoreService(IFileStoreService fileStoreService) {
+        this.fileStoreService = fileStoreService;
     }
 
     @GetMapping
@@ -82,13 +89,19 @@ public class MsgBuildController {
         mi.setSubject(miDTO.getSubject());
         mi.setBody(miDTO.getBody());
 
+
+
         if (!file.isEmpty()) {
-            String pathToSavedFile = attachmentSaverService.saveNotCryptedFileName(file);
-            logger.info(pathToSavedFile);
-            Attachment attachment = new Attachment();
-            attachment.setPath(pathToSavedFile);
-            attachment.setMessageItem(mi);
-            mi.addAttachment(attachment);
+//          код для упрощенного хранения внутри приложения
+//            String pathToSavedFile = attachmentSaverService.saveNotCryptedFileName(file);
+//            logger.info(pathToSavedFile);
+//            Attachment attachment = new Attachment();
+//            attachment.setPath(pathToSavedFile);
+//            attachment.setMessageItem(mi);
+//            mi.addAttachment(attachment);
+
+            logger.info(attachmentSaverService.getExtension(file));
+
         }
         return "redirect:/msgbuild";
     }

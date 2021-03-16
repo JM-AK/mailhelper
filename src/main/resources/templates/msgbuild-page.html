@@ -128,14 +128,31 @@
         </table>
 
         <!-- кнопки для отправки рассылки на подготовку сообщения-->
-        <a sec:authorize="isAuthenticated()" type="button" class="btn btn-primary" th:href="@{messages/message/prepare}"
+        <a sec:authorize="isAuthenticated()" type="button" class="btn btn-primary" th:href="@{/mail/message/prepare}"
            th:if="${msgbuild.items.size() > 0}">Подготовить сообщение</a>
         <a sec:authorize="isAnonymous()" type="button" class="btn btn-primary" data-toggle="modal"
            data-target="#authWarningModal">Подготовить сообщение</a>
 
     </div>
-
 </div>
+
+<div class="modal fade" id="authWarningModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Предупреждение</h5>
+            </div>
+            <div class="modal-body">
+                <span>Для отправки сообщений Вам необходимо зайти в свою учетную запись</span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Хорошо</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"

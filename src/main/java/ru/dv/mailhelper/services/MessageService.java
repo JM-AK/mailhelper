@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import ru.dv.mailhelper.beans.MsgBuild;
 import ru.dv.mailhelper.entities.Message;
 import ru.dv.mailhelper.entities.MessageItem;
+import ru.dv.mailhelper.entities.User;
 import ru.dv.mailhelper.repositories.MessageRepository;
 
 import javax.transaction.Transactional;
@@ -33,9 +34,10 @@ public class MessageService {
     }
 
     @Transactional
-    public Message createMessage(MsgBuild msgBuild) {
+    public Message createMessage(MsgBuild msgBuild, User user) {
         Message message = new Message();
         message.setId(0L);
+        message.setUser(user);
         message.setMessageItems(new ArrayList<>(msgBuild.getItems()));
         for (MessageItem mi : msgBuild.getItems()) {
             mi.setMessage(message);

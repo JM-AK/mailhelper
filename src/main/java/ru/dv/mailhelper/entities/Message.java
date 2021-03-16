@@ -30,4 +30,15 @@ public class Message {
     @UpdateTimestamp
     private LocalDateTime updateAt;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "status_id")
+    private MessageStatus status;
+
+    @Column(name = "sent_at")
+    private LocalDateTime sentDate;
+
 }

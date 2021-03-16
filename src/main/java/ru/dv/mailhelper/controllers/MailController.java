@@ -43,7 +43,7 @@ public class MailController {
     private static final Logger logger = LoggerFactory.getLogger(MailController.class);
 
     @GetMapping("/message/prepare")
-    public String orderFill(Model model, HttpServletRequest httpServletRequest, Principal principal) {
+    public String messagePrepare(Model model, HttpServletRequest httpServletRequest, Principal principal) {
         if (principal == null) {
             return "redirect:/login";
         }
@@ -51,6 +51,7 @@ public class MailController {
         User user = userService.findByUsername(principal.getName());
         MsgBuild msgBuild = (MsgBuild) httpServletRequest.getSession().getAttribute("msbuild");
         Message message = messageService.createMessage(msgBuild, user);
+
 
         model.addAttribute("message", message);
         return "message-preparator";

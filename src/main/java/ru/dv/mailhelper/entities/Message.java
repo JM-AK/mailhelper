@@ -1,5 +1,6 @@
 package ru.dv.mailhelper.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -40,5 +41,9 @@ public class Message {
 
     @Column(name = "sent_at")
     private LocalDateTime sentDate;
+
+    @JsonIgnore
+    @Transient
+    private boolean confirmed;
 
 }

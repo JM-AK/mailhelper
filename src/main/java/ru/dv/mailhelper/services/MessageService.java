@@ -15,10 +15,16 @@ import java.util.List;
 @Service
 public class MessageService {
     private MessageRepository messageRepository;
+    private MessageStatusService messageStatusService;
 
     @Autowired
     public void setMessageRepository(MessageRepository messageRepository) {
         this.messageRepository = messageRepository;
+    }
+
+    @Autowired
+    public void setMessageStatusService(MessageStatusService messageStatusService) {
+        this.messageStatusService = messageStatusService;
     }
 
     public List<Message> findAll(){
@@ -30,7 +36,9 @@ public class MessageService {
     }
 
     public Message saveMessage(Message message){
-        return messageRepository.save(message);
+        Message msgOut = messageRepository.save(message);
+        msgOut.setConfirmed(true);
+        return msgOut;
     }
 
     @Transactional
@@ -38,11 +46,18 @@ public class MessageService {
         Message message = new Message();
         message.setId(0L);
         message.setUser(user);
+        message.setStatus(messageStatusService.getStatusById(1L));
         message.setMessageItems(new ArrayList<>(msgBuild.getItems()));
         for (MessageItem mi : msgBuild.getItems()) {
             mi.setMessage(message);
         }
         return message;
+    }
+
+
+    public void changeMessageStatus(Message message, Long statusId) {
+        message.setStatus(messageStatusService.getStatusById(statusId));
+        saveMessage(message);
     }
 
 }

@@ -1,5 +1,8 @@
 package ru.dv.mailhelper.controllers;
 
+import javafx.scene.Scene;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +24,9 @@ import ru.dv.mailhelper.services.MailingService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.swing.plaf.FileChooserUI;
+import javax.swing.plaf.multi.MultiFileChooserUI;
+import java.io.File;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 
@@ -85,24 +91,20 @@ public class MsgBuildController {
     }
 
     @PostMapping("/edit")
-    public String showEditMailingItemPage(@ModelAttribute(name = "message_item") MessageItem miDTO, @RequestParam("file") MultipartFile file) throws IOException, NoSuchAlgorithmException {
+    public String showEditMailingItemPage(@ModelAttribute(name = "message_item") MessageItem miDTO,
+                                          @RequestParam("file") MultipartFile file,
+                                          @RequestParam("uploadFolder") String uploadFolder) {
         MessageItem mi = msgBuild.findMessageItemByMailingId(miDTO.getMailing().getId());
         mi.setSubject(miDTO.getSubject());
         mi.setBody(miDTO.getBody());
 
-
-
         if (!file.isEmpty()) {
-//          код для упрощенного хранения внутри приложения
-//            String pathToSavedFile = attachmentSaverService.saveNotCryptedFileName(file);
-//            logger.info(pathToSavedFile);
-//            Attachment attachment = new Attachment();
-//            attachment.setPath(pathToSavedFile);
-//            attachment.setMessageItem(mi);
-//            mi.addAttachment(attachment);
-
-            logger.info(fileStoreService.storeFile(file.getBytes(),file.getOriginalFilename(),1));
-
+            String pathToSavedFile = attachmentSaverService.saveNotCryptedFileName(file, uploadFolder);
+            logger.info(pathToSavedFile);
+            Attachment attachment = new Attachment();
+            attachment.setPath(pathToSavedFile);
+            attachment.setMessageItem(mi);
+            mi.addAttachment(attachment);
         }
         return "redirect:/msgbuild";
     }

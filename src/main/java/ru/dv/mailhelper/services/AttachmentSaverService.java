@@ -10,15 +10,14 @@ import java.util.UUID;
 
 @Service
 public class AttachmentSaverService {
-    private static final String UPLOADED_FOLDER = "Store/";
 
-    public String saveCryptedFileName(MultipartFile file) {
+    public String saveCryptedFileName(MultipartFile file, String uploadFolder) {
         if (file.isEmpty()) {
             return "";
         }
         String fileName = UUID.randomUUID().toString() + file.getOriginalFilename();
         try {
-            Path path = Paths.get(UPLOADED_FOLDER + fileName);
+            Path path = Paths.get(uploadFolder + fileName);
             file.transferTo(path);
         } catch (IOException e) {
             e.printStackTrace();
@@ -26,13 +25,13 @@ public class AttachmentSaverService {
         return fileName;
     }
 
-    public String saveNotCryptedFileName(MultipartFile file) {
+    public String saveNotCryptedFileName(MultipartFile file, String uploadFolder) {
         if (file.isEmpty()) {
             return "";
         }
         String fileName = file.getOriginalFilename();
         try {
-            Path path = Paths.get(UPLOADED_FOLDER + fileName);
+            Path path = Paths.get(uploadFolder + fileName);
             file.transferTo(path);
         } catch (IOException e) {
             e.printStackTrace();

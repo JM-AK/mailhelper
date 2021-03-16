@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.dv.mailhelper.beans.MsgBuild;
 import ru.dv.mailhelper.entities.Message;
@@ -16,6 +18,7 @@ import ru.dv.mailhelper.services.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -51,12 +54,22 @@ public class MailController {
         User user = userService.findByUsername(principal.getName());
         MsgBuild msgBuild = (MsgBuild) httpServletRequest.getSession().getAttribute("msbuild");
         Message message = messageService.createMessage(msgBuild, user);
-
-
         model.addAttribute("message", message);
         return "message-preparator";
     }
 
+    @PostMapping("/message/confirm")
+    public String messageConfirm(Model model, HttpServletRequest httpServletRequest, Principal principal) {
+        if (principal == null) {
+            return "redirect:/login";
+        }
+        User user = userService.findByUsername(principal.getName());
+        Message message = (Message) model.getAttribute("message");
+        message.setSentDate(LocalDateTime.now());
+        message = messageService.saveMessage(message);
+        model.addAttribute("message", message);
+        return "message-preparator";
+    }
 
 
 }

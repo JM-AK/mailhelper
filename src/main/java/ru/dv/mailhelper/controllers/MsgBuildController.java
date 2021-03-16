@@ -24,11 +24,6 @@ import ru.dv.mailhelper.services.MailingService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.swing.plaf.FileChooserUI;
-import javax.swing.plaf.multi.MultiFileChooserUI;
-import java.io.File;
-import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
 
 @Controller
 @RequestMapping("/msgbuild")
@@ -92,14 +87,14 @@ public class MsgBuildController {
 
     @PostMapping("/edit")
     public String showEditMailingItemPage(@ModelAttribute(name = "message_item") MessageItem miDTO,
-                                          @RequestParam("file") MultipartFile file,
-                                          @RequestParam("uploadFolder") String uploadFolder) {
+                                          @RequestParam("file") MultipartFile file) {
         MessageItem mi = msgBuild.findMessageItemByMailingId(miDTO.getMailing().getId());
         mi.setSubject(miDTO.getSubject());
         mi.setBody(miDTO.getBody());
+        mi.setUploadFolder(miDTO.getUploadFolder());
 
         if (!file.isEmpty()) {
-            String pathToSavedFile = attachmentSaverService.saveNotCryptedFileName(file, uploadFolder);
+            String pathToSavedFile = attachmentSaverService.saveNotCryptedFileName(file, mi.getUploadFolder());
             logger.info(pathToSavedFile);
             Attachment attachment = new Attachment();
             attachment.setPath(pathToSavedFile);

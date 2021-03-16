@@ -32,6 +32,9 @@ public class MessageItem {
     @Column(name = "body")
     private String body;
 
+    @Column(name = "upload_folder")
+    private String uploadFolder;
+
     @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "messageItem")
     @JsonIgnore
     private List<Attachment> attachmentList;

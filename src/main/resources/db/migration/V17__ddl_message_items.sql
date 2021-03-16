@@ -4,11 +4,12 @@ DROP TABLE IF EXISTS message_items;
 
 CREATE TABLE message_items
 (
-    id         BIGINT(11) NOT NULL AUTO_INCREMENT,
-    mailing_id BIGINT(11) NOT NULL,
-    message_id BIGINT(11) NOT NULL,
-    subject    VARCHAR(50)  DEFAULT NULL,
-    body       VARCHAR(255) DEFAULT NULL,
+    id            BIGINT(11) NOT NULL AUTO_INCREMENT,
+    mailing_id    BIGINT(11) NOT NULL,
+    message_id    BIGINT(11) NOT NULL,
+    subject       VARCHAR(50)  DEFAULT NULL,
+    body          VARCHAR(255) DEFAULT NULL,
+    upload_folder VARCHAR(255) DEFAULT NULL,
 
     PRIMARY KEY (id),
     CONSTRAINT FK_Message_items__Mailings__id FOREIGN KEY (mailing_id)

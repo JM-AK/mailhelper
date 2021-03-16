@@ -63,8 +63,11 @@ public class MailController {
         if (principal == null) {
             return "redirect:/login";
         }
-        User user = userService.findByUsername(principal.getName());
-        Message message = (Message) model.getAttribute("message");
+        Message message = (Message) httpServletRequest.getSession().getAttribute("message");
+
+
+
+
         message.setSentDate(LocalDateTime.now());
         message = messageService.saveMessage(message);
         model.addAttribute("message", message);

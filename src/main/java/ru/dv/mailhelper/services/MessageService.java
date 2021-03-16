@@ -10,12 +10,14 @@ import ru.dv.mailhelper.repositories.MessageRepository;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @Service
 public class MessageService {
     private MessageRepository messageRepository;
     private MessageStatusService messageStatusService;
+    private MailService mailService;
 
     @Autowired
     public void setMessageRepository(MessageRepository messageRepository) {
@@ -58,6 +60,13 @@ public class MessageService {
     public void changeMessageStatus(Message message, Long statusId) {
         message.setStatus(messageStatusService.getStatusById(statusId));
         saveMessage(message);
+    }
+
+    public void sendMessage(Message message) {
+        Iterator<MessageItem> iter = message.getMessageItems().iterator();
+        while (iter.hasNext()){
+
+        }
     }
 
 }

@@ -29,6 +29,11 @@ public class MessageService {
         this.messageStatusService = messageStatusService;
     }
 
+    @Autowired
+    public void setMailService(MailService mailService) {
+        this.mailService = mailService;
+    }
+
     public List<Message> findAll(){
         return messageRepository.findAll();
     }
@@ -65,7 +70,12 @@ public class MessageService {
     public void sendMessage(Message message) {
         Iterator<MessageItem> iter = message.getMessageItems().iterator();
         while (iter.hasNext()){
-
+            MessageItem mi = iter.next();
+            mailService.sendMailWithAttachment(message.getUser().getEmail(),
+                    mi.getMailing().getContactTo().toString(),
+                    mi.getMailing().getContactCopy().toString(),
+                    mi.getMailing().getContactBcc().toString(),
+                    mi.getSubject(), mi.getBody(), mi.getAttachmentList().toString());
         }
     }
 

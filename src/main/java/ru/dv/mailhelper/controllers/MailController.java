@@ -64,10 +64,7 @@ public class MailController {
             return "redirect:/login";
         }
         Message message = (Message) httpServletRequest.getSession().getAttribute("message");
-
-
-
-
+        messageService.sendMessage(message);
         message.setSentDate(LocalDateTime.now());
         message = messageService.saveMessage(message);
         model.addAttribute("message", message);

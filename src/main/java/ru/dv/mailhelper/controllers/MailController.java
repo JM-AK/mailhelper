@@ -66,8 +66,7 @@ public class MailController {
         Message message = (Message) httpServletRequest.getSession().getAttribute("message");
         messageService.sendMessage(message);
         message.setSentDate(LocalDateTime.now());
-        message = messageService.saveMessage(message);
-        model.addAttribute("message", message);
+//        message = messageService.saveMessage(message);
         return "message-preparator";
     }
 

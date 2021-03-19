@@ -71,11 +71,17 @@ public class MessageService {
         Iterator<MessageItem> iter = message.getMessageItems().iterator();
         while (iter.hasNext()){
             MessageItem mi = iter.next();
-            mailService.sendMailWithAttachment(message.getUser().getEmail(),
-                    mi.getMailing().getContactTo().toString(),
-                    mi.getMailing().getContactCopy().toString(),
-                    mi.getMailing().getContactBcc().toString(),
-                    mi.getSubject(), mi.getBody(), mi.getAttachmentList().toString());
+//            mailService.sendMailWithAttachment(message.getUser().getEmail(),
+//                    mi.getMailing().getContactTo().toString(),
+//                    mi.getMailing().getContactCopy().toString(),
+//                    mi.getMailing().getContactBcc().toString(),
+//                    mi.getSubject(), mi.getBody(), mi.getAttachmentList().toString());
+
+            System.out.println(mi.getMailing().getContactTo().toString());
+            System.out.println(mi.getSubject());
+            System.out.println(mi.getBody());
+            System.out.println(mi.getAttachmentList().toString());
+
         }
     }
 

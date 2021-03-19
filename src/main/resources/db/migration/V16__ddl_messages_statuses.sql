@@ -1,0 +1,10 @@
+DROP TABLE IF EXISTS messages_statuses;
+
+CREATE TABLE messages_statuses
+(
+    id    BIGINT(11) NOT NULL AUTO_INCREMENT,
+    title VARCHAR(50) DEFAULT NULL,
+        CONSTRAINT PK_Messages_statuses__id PRIMARY KEY (id)
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  DEFAULT CHARSET = UTF8MB4;

@@ -1,6 +1,7 @@
 package ru.dv.mailhelper.repositories;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
@@ -11,6 +12,7 @@ import java.util.Collection;
 import java.util.UUID;
 
 @Repository
+@Profile("filemanager")
 public class FileMetaProvider implements IFileMetaProvider {
 
     private static final String GET_FILES_META = "select hash, file_name as filename from file_info_metadata" +

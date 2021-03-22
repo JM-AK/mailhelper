@@ -31,7 +31,7 @@ public class MsgBuildController {
     private MailingService mailingService;
     private MsgBuild msgBuild;
     private AttachmentSaverService attachmentSaverService;
-    private IFileStoreService fileStoreService;
+//    private IFileStoreService fileStoreService;
 
     private static final Logger logger = LoggerFactory.getLogger(MsgBuildController.class);
 
@@ -50,10 +50,10 @@ public class MsgBuildController {
         this.attachmentSaverService = attachmentSaverService;
     }
 
-    @Autowired
-    public void setFileStoreService(IFileStoreService fileStoreService) {
-        this.fileStoreService = fileStoreService;
-    }
+//    @Autowired
+//    public void setFileStoreService(IFileStoreService fileStoreService) {
+//        this.fileStoreService = fileStoreService;
+//    }
 
     @GetMapping
     public String showMsgBuildPage(Model model, HttpSession session) {

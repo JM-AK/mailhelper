@@ -1,10 +1,7 @@
 package ru.dv.mailhelper.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.*;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -18,6 +15,7 @@ import java.util.Locale;
 @Configuration
 @PropertySource("classpath:private.properties")
 @ComponentScan("ru.dv.mailhelper")
+@EnableAspectJAutoProxy
 public class AppConfig implements WebMvcConfigurer {
 
     @Bean

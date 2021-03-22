@@ -5,6 +5,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import ru.dv.mailhelper.controllers.MsgBuildController;
 import ru.dv.mailhelper.repositories.interfaces.IFileSystemProvider;
@@ -19,6 +20,7 @@ import java.util.UUID;
 import java.util.stream.Stream;
 
 @Component
+@Profile("filemanager")
 public class FileSystemProvider implements IFileSystemProvider {
 
     @Value("${store.folder}")

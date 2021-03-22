@@ -1,6 +1,7 @@
 package ru.dv.mailhelper.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
@@ -19,6 +20,7 @@ import java.util.UUID;
 
 @Controller
 @CrossOrigin
+@Profile("filemanager")
 public class FileController {
 
     @Autowired

@@ -18,6 +18,10 @@ public class MessageStatus {
     @Column(name = "title")
     private String title;
 
+    public MessageStatus(String title) {
+        this.title = title;
+    }
+
     @Override
     public String toString() {
         return "Status{" + "id=" + id + ", title='" + title + '\'' + '}';

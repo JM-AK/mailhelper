@@ -66,7 +66,6 @@ public class MsgBuildController {
     public String addMailing(@PathVariable(name = "mailing_id") Long mailingId, HttpServletRequest request) {
         Mailing m = mailingService.findById(mailingId).orElseThrow(() -> new MailingNotFoundException(String.format("Mailing with id=%s doesn't exists", mailingId)));
         msgBuild.add(m, null, null);
-
         String referrer = request.getHeader("referer");
         return "redirect:" + referrer;
     }
@@ -95,7 +94,6 @@ public class MsgBuildController {
 
         if (!file.isEmpty()) {
             String pathToSavedFile = attachmentSaverService.saveNotCryptedFileName(file, mi.getUploadFolder());
-            logger.info(pathToSavedFile);
             Attachment attachment = new Attachment();
             attachment.setPath(pathToSavedFile);
             attachment.setMessageItem(mi);

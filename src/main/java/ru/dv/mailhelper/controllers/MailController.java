@@ -53,6 +53,9 @@ public class MailController {
 
         User user = userService.findByUsername(principal.getName());
         MsgBuild msgBuild = (MsgBuild) httpServletRequest.getSession().getAttribute("msbuild");
+
+        logger.info(msgBuild.getItems().toString());
+
         Message message = messageService.createMessage(msgBuild, user);
         model.addAttribute("message", message);
         return "message-preparator";

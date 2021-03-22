@@ -40,8 +40,8 @@ public class MsgBuild {
     public void remove(Long mailingId) {
         Iterator<MessageItem> iter = items.iterator();
         while (iter.hasNext()) {
-            MessageItem o = iter.next();
-            if (o.getMailing().getId().equals(mailingId)) {
+            MessageItem mi = iter.next();
+            if (mi.getMailing().getId().equals(mailingId)) {
                 iter.remove();
                 recalculate();
                 return;
@@ -51,17 +51,17 @@ public class MsgBuild {
 
     public void recalculate() {
         totalQuantity = 0;
-        for (MessageItem o : items) {
+        for (MessageItem mi : items) {
             totalQuantity++;
         }
     }
 
     private MessageItem findMessageItemByMailing(Mailing m) {
-        return items.stream().filter(o -> o.getMailing().getId().equals(m.getId())).findFirst().orElse(null);
+        return items.stream().filter(mi -> mi.getMailing().getId().equals(m.getId())).findFirst().orElse(null);
     }
 
     public MessageItem findMessageItemByMailingId(Long id) {
-        return items.stream().filter(o -> o.getMailing().getId().equals(id)).findFirst().orElse(null);
+        return items.stream().filter(mi -> mi.getMailing().getId().equals(id)).findFirst().orElse(null);
     }
 
 }

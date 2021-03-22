@@ -2,13 +2,13 @@ package ru.dv.mailhelper.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.dv.mailhelper.beans.MsgBuild;
 import ru.dv.mailhelper.entities.Message;
 import ru.dv.mailhelper.entities.MessageItem;
 import ru.dv.mailhelper.entities.User;
 import ru.dv.mailhelper.repositories.MessageRepository;
 
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -41,6 +41,7 @@ public class MessageService {
     public Message findById(Long id) {
         return messageRepository.findById(id).get();
     }
+
 
     public Message saveMessage(Message message){
         Message msgOut = messageRepository.save(message);

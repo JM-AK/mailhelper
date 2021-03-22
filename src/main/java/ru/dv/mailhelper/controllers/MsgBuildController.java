@@ -1,8 +1,5 @@
 package ru.dv.mailhelper.controllers;
 
-import javafx.scene.Scene;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +16,6 @@ import ru.dv.mailhelper.entities.MessageItem;
 import ru.dv.mailhelper.exceptions.MailingNotFoundException;
 import ru.dv.mailhelper.exceptions.ResourceNotFoundException;
 import ru.dv.mailhelper.services.AttachmentSaverService;
-import ru.dv.mailhelper.services.IFileStoreService;
 import ru.dv.mailhelper.services.MailingService;
 
 import javax.servlet.http.HttpServletRequest;

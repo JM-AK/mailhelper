@@ -53,16 +53,14 @@ public class MailController {
 
         User user = userService.findByUsername(principal.getName());
         MsgBuild msgBuild = (MsgBuild) httpServletRequest.getSession().getAttribute("msgbuild");
-
-        logger.info(String.valueOf(msgBuild.getItems().size()));
-
         Message message = messageService.createMessage(msgBuild, user);
         model.addAttribute("message", message);
         return "message-preparator";
     }
 
-    @PostMapping("/message/confirm")
+    @GetMapping("/message/confirm")
     public String messageConfirm(Model model, HttpServletRequest httpServletRequest, Principal principal) {
+
         if (principal == null) {
             return "redirect:/login";
         }

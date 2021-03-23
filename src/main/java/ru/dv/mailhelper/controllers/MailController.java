@@ -11,8 +11,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.dv.mailhelper.beans.MsgBuild;
 import ru.dv.mailhelper.entities.Message;
+import ru.dv.mailhelper.entities.MessageItem;
 import ru.dv.mailhelper.entities.User;
+import ru.dv.mailhelper.entities.dtos.MessageItemDto;
 import ru.dv.mailhelper.services.MailService;
+import ru.dv.mailhelper.services.MessageItemConverter;
 import ru.dv.mailhelper.services.MessageService;
 import ru.dv.mailhelper.services.UserService;
 
@@ -27,6 +30,7 @@ public class MailController {
     private MailService mailService;
     private MessageService messageService;
     private UserService userService;
+    private MessageItemConverter messageItemConverter;
 
     @Autowired
     public void setMailService(MailService mailService) {
@@ -43,6 +47,11 @@ public class MailController {
         this.userService = userService;
     }
 
+    @Autowired
+    public void setMessageItemConverter(MessageItemConverter messageItemConverter) {
+        this.messageItemConverter = messageItemConverter;
+    }
+
     private static final Logger logger = LoggerFactory.getLogger(MailController.class);
 
     @GetMapping("/message/prepare")
@@ -54,7 +63,8 @@ public class MailController {
         User user = userService.findByUsername(principal.getName());
         MsgBuild msgBuild = (MsgBuild) httpServletRequest.getSession().getAttribute("msgbuild");
         Message message = messageService.createMessage(msgBuild, user);
-        model.addAttribute("message", message);
+        List<MessageItemDto> messageItemList = messageItemConverter.mapEntityListToDtoList(message.getMessageItems());
+        model.addAttribute("messageItemList", messageItemList);
         return "message-preparator";
     }
 

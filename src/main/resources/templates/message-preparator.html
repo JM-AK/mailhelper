@@ -17,20 +17,20 @@
 <div class="message-result container">
     <h3 class="heading">Подготовленные сообщения к отправке</h3>
     <div class="message-item-box">
-        <div class="message-item" th:each="mi : ${message.messageItems}">
-            <h4 class="heading-mini" th:text="${mi.mailing.company.shortName}">Name of the Company</h4>
+        <div class="message-item" th:each="mi : ${messageItemList}">
+            <h4 class="heading-mini" th:text="${mi.companyName}">Name of the Company</h4>
             <ul class=contact__info>
                 <li class="contact__email">
                     <span class="field_header">TO:</span>
-                    <span class="text text_email" th:text="${mi.mailing.contactTo}">a@dddd.com</span>
+                    <span class="text text_email" th:text="${mi.emailTo}">a@dddd.com</span>
                 </li>
                 <li class="contact__email">
                     <span class="field_header">COPY:</span>
-                    <span class="text text_email" th:text="${mi.mailing.contactCopy}">a@dddd.com</span>
+                    <span class="text text_email" th:text="${mi.emailCopy}">a@dddd.com</span>
                 </li>
                 <li class="contact__email">
                     <span class="field_header">BCC:</span>
-                    <span class="text text_email" th:text="${mi.mailing.contactBcc}">a@dddd.com</span>
+                    <span class="text text_email" th:text="${mi.emailBcc}">a@dddd.com</span>
                 </li>
             </ul>
             <p class="text text_subject" th:text="${mi.subject}"> Subject</p>

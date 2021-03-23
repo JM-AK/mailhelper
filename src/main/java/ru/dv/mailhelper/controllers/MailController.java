@@ -70,11 +70,11 @@ public class MailController {
 
     @GetMapping("/message/confirm")
     public String messageConfirm(Model model, HttpServletRequest httpServletRequest, Principal principal) {
-
         if (principal == null) {
             return "redirect:/login";
         }
-        Message message = (Message) httpServletRequest.getSession().getAttribute("message");
+
+        Message message = (Message) httpServletRequest.getSession().getAttribute("messageItemList");
         messageService.sendMessage(message);
         message.setSentDate(LocalDateTime.now());
 //        message = messageService.saveMessage(message);

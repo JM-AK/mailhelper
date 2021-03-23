@@ -16,9 +16,9 @@ public class MessageItemDto {
     private Long mailingId;
 
     private String companyName;
-    private List<String> emailTo;
-    private List<String> emailCopy;
-    private List<String> emailBcc;
+    private String emailTo;
+    private String emailCopy;
+    private String emailBcc;
 
     private String subject;
     private String body;
@@ -29,13 +29,13 @@ public class MessageItemDto {
         this.id = mi.getId();
         this.mailingId = mi.getMailing().getId();
         this.companyName = mi.getMailing().getCompany().getShortName();
-        this.emailTo = mi.getMailing().getContactTo().stream().map(Contact::getEmail).collect(Collectors.toList());
-        this.emailCopy = mi.getMailing().getContactCopy().stream().map(Contact::getEmail).collect(Collectors.toList());
-        this.emailBcc = mi.getMailing().getContactBcc().stream().map(Contact::getEmail).collect(Collectors.toList());
+        this.emailTo = mi.getMailing().getContactTo().stream().map(Contact::getEmail).collect(Collectors.toList()).toString().replaceAll("\\[(.*?)\\]", "$1");
+        this.emailCopy = mi.getMailing().getContactCopy().stream().map(Contact::getEmail).collect(Collectors.toList()).toString().replaceAll("\\[(.*?)\\]", "$1");
+        this.emailBcc = mi.getMailing().getContactBcc().stream().map(Contact::getEmail).collect(Collectors.toList()).toString().replaceAll("\\[(.*?)\\]", "$1");
         this.subject = mi.getSubject();
         this.body = mi.getBody();
         this.uploadFolder = mi.getUploadFolder();
-        this.attachmentList = mi.getAttachmentList().stream().map(Attachment::getPath).collect(Collectors.toList());
+        if (mi.getAttachmentList() != null ) this.attachmentList = mi.getAttachmentList().stream().map(Attachment::getPath).collect(Collectors.toList());
     }
 
 }

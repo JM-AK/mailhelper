@@ -40,13 +40,13 @@ public class MailService {
                                                 String attachPath) {
         MimeMessagePreparator preparator = mimeMessage -> {
             MimeMessageHelper message = new MimeMessageHelper(mimeMessage, (attachPath != null), "UTF-8");
-            message.setTo(toAddress.split("[,;]"));
+            message.setTo(toAddress.replaceAll("\\[(.*?)\\]", "$1").split("[,;]"));
             message.setFrom(from, "<From Name>");
             message.setSubject(subject);
             if (ccAddress != null)
-                message.setCc(ccAddress.split("[;,]"));
+                message.setCc(ccAddress.replaceAll("\\[(.*?)\\]", "$1").split("[;,]"));
             if (bccAddress != null)
-                message.setBcc(bccAddress.split("[;,]"));
+                message.setBcc(bccAddress.replaceAll("\\[(.*?)\\]", "$1").split("[;,]"));
             message.setText(body, false);
             if (attachPath != null) {
                 FileSystemResource file = new FileSystemResource(attachPath);

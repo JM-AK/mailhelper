@@ -3,10 +3,6 @@
     padding: 0;
 }
 
-body {
-    font-family: sans-serif;
-}
-
 .container {
     max-width: 1140px;
     margin: 0 auto;
@@ -20,28 +16,7 @@ body {
     opacity: 0.6;
 }
 
-.what-we-do {
-    padding-top: 64px;
-}
-
-.heading {
-    font-size: 36px;
-    text-align: center;
-    font-weight: 300;
-    line-height: 46px;
-    letter-spacing: 0.05em;
-    color: #000000;
-}
-
-.heading-mini {
-    font-size: 20px;
-    line-height: 30px;
-    letter-spacing: 0.05em;
-    color: #1F3F68;
-    margin-bottom: 14px;
-}
-
-.mycard-box{
+.card-box{
     display: flex;
     justify-content: space-between;
     padding-top: 64px;
@@ -73,3 +48,23 @@ body {
     text-decoration: none;
 }
 
+.what-we-do {
+    padding-top: 64px;
+}
+
+.heading {
+    font-size: 100px;
+    text-align: center;
+    font-weight: 300;
+    line-height: 46px;
+    letter-spacing: 0.05em;
+    color: #000000;
+}
+
+.heading-mini {
+    font-size: 20px;
+    line-height: 30px;
+    letter-spacing: 0.05em;
+    color: #1F3F68;
+    margin-bottom: 14px;
+}

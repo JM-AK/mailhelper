@@ -16,18 +16,16 @@ import java.util.Locale;
 @Configuration
 @PropertySource("classpath:private.properties")
 @ComponentScan("ru.dv.mailhelper")
-@EnableAspectJAutoProxy
 public class AppConfig implements WebMvcConfigurer {
+
+    private static final String[] CLASSPATH_RESOURCE_LOCATIONS = {
+            "classpath:/META-INF/resources/", "classpath:/resources/",
+            "classpath:/static/", "classpath:/public/" };
+
+    @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        if (!registry.hasMappingForPattern("/images/**")) {
-            registry.addResourceHandler("/images/**").addResourceLocations("file:images/");
-        }
-        if (!registry.hasMappingForPattern("/css/**")) {
-            registry.addResourceHandler("/css/**").addResourceLocations("file:css/");
-        }
-        if (!registry.hasMappingForPattern("/js/**")) {
-            registry.addResourceHandler("/js/**").addResourceLocations("file:js/");
-        }
+        registry.addResourceHandler("/**")
+                .addResourceLocations(CLASSPATH_RESOURCE_LOCATIONS);
     }
 
     @Bean

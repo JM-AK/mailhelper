@@ -5,9 +5,9 @@
 
 <head>
     <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/style.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" type="text/css"  th:href="@{/css/main.css}"/>
     <title>Рассылка</title>
     <meta name="ctx" th:content="${#httpServletRequest.getContextPath()}"/>
 
@@ -16,9 +16,8 @@
 
 <div class="what-we-do container">
     <h3 class="heading">What we do to help our client grow in digital era</h3>
-    <div class="mycard-box">
+    <div class="card-box">
         <div class="card">
-            <img class="card__img" src="image/card-1.svg" alt="card 1">
             <h4 class="heading-mini">Make Your business To Be
                 Better Famous In Internet</h4>
             <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae deleniti
@@ -27,7 +26,6 @@
             <a class="card__link" href="#">Learn more</a>
         </div>
         <div class="card">
-            <img class="card__img" src="image/card-2.svg" alt="card 2">
             <h4 class="heading-mini">Bring Technology To Your
                 Comfrotable Home</h4>
             <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae deleniti

@@ -39,7 +39,12 @@
                 laudantium
                 repellat, nesciunt.</p>
 
-            <a class="message__link" href="#">Приложения</a>
+            <p class="message__link" href="#">Приложения</p>
+            <ul class="contact__info" >
+                <li class="text"  th:each="attachment : ${mi.getAttachmentList()}"  >
+                    <a class="message__link" href="#" th:text="${attachment}" >Приложения</a>
+                </li>
+            </ul>
         </div>
 
     </div>

@@ -1,49 +1,43 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en">
 
 <head>
     <meta charset="utf-8"/>
-
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
     <title>Рассылка</title>
-
-    <link rel="icon" type="image/png" th:href="@{/favicon.ico}"/>
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <meta name="ctx" th:content="${#httpServletRequest.getContextPath()}"/>
 
 </head>
 <body>
 
-<div th:replace="~{navigation :: navi(MsgBuild)}"/>
-
-<div class="container">
-
-
-
-
-</div>
-
-<div class="modal fade" id="authWarningModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Предупреждение</h5>
-            </div>
-            <div class="modal-body">
-                <span>Для отправки сообщений Вам необходимо зайти в свою учетную запись</span>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Хорошо</button>
-            </div>
+<div class="what-we-do container">
+    <h3 class="heading">What we do to help our client grow in digital era</h3>
+    <div class="mycard-box">
+        <div class="card">
+            <img class="card__img" src="image/card-1.svg" alt="card 1">
+            <h4 class="heading-mini">Make Your business To Be
+                Better Famous In Internet</h4>
+            <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae deleniti
+                laudantium
+                repellat, nesciunt.</p>
+            <a class="card__link" href="#">Learn more</a>
         </div>
+        <div class="card">
+            <img class="card__img" src="image/card-2.svg" alt="card 2">
+            <h4 class="heading-mini">Bring Technology To Your
+                Comfrotable Home</h4>
+            <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae deleniti
+                laudantium
+                repellat, nesciunt.</p>
+            <a class="card__link" href="#">Learn more</a>
+        </div>
+
     </div>
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
-        crossorigin="anonymous"></script>
 
 </body>
 </html>

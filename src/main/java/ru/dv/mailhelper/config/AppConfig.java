@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.*;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
@@ -17,6 +18,17 @@ import java.util.Locale;
 @ComponentScan("ru.dv.mailhelper")
 @EnableAspectJAutoProxy
 public class AppConfig implements WebMvcConfigurer {
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        if (!registry.hasMappingForPattern("/images/**")) {
+            registry.addResourceHandler("/images/**").addResourceLocations("file:images/");
+        }
+        if (!registry.hasMappingForPattern("/css/**")) {
+            registry.addResourceHandler("/css/**").addResourceLocations("file:css/");
+        }
+        if (!registry.hasMappingForPattern("/js/**")) {
+            registry.addResourceHandler("/js/**").addResourceLocations("file:js/");
+        }
+    }
 
     @Bean
     public LocaleResolver localeResolver() {
@@ -31,8 +43,6 @@ public class AppConfig implements WebMvcConfigurer {
         localeChangeInterceptor.setParamName("lang");
         return localeChangeInterceptor;
     }
-
-
 
 //    @Bean
 //    public FileMetaProvider fileMetaProvider(@Autowired Sql2o sql2o) {

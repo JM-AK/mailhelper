@@ -35,11 +35,17 @@
     font-size: 14px;
 }
 
+.top__message {
+    display: flex;
+    justify-content: space-between;
+}
+
 .message-item-box {
     display: flex;
     justify-content: space-between;
     padding-top: 64px;
     padding-bottom: 64px;
+    flex-wrap: wrap;
 }
 
 .message-item {
@@ -52,6 +58,7 @@
     border-radius: 10px;
     display: flex;
     flex-direction: column;
+    margin-bottom: 10px;
 }
 
 .message__img {
@@ -71,13 +78,14 @@
     padding-top: 64px;
 }
 
-.heading {
+.heading_top {
     font-size: 36px;
     text-align: center;
     font-weight: 300;
     line-height: 46px;
     letter-spacing: 0.05em;
     color: #000000;
+    flex-grow: 1;
 }
 
 .heading-mini {
@@ -93,4 +101,40 @@
     line-height: 26px;
     letter-spacing: 0.05em;
     list-style-type: none;
+}
+
+.footer_message {
+    display: flex;
+    justify-content: space-around;
+}
+
+.footer__panel {
+    width: 495px;
+    margin-bottom: 50px;
+}
+
+.heading__footer{
+    font-size: 36px;
+    font-weight: normal;
+    line-height: 46px;
+    letter-spacing: 0.05em;
+    color: #5A98D0;
+    margin-top: 50px;
+    margin-bottom: 32px;
+}
+
+.management__button {
+    font-size: 16px;
+    line-height: 26px;
+    text-align: center;
+    letter-spacing: 0.04em;
+    color: #FFFFFF;
+    background: #5A98D0;
+    text-decoration: none;
+    padding: 15px 80px;
+    flex-basis: inherit;
+    align-self: center;
+    box-shadow: 5px 10px 20px rgba(53, 110, 173, 0.2);
+    border-radius: 10px;
+    text-decoration: none;
 }

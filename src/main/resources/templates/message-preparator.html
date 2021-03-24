@@ -15,7 +15,11 @@
 <body>
 
 <div class="message-result container">
-    <h3 class="heading">Подготовленные сообщения к отправке</h3>
+    <div class="container top__message">
+        <a href="#" class="heading-mini">Назад</a>
+        <h3 class="heading_top">Подготовленные сообщения к отправке</h3>
+    </div>
+
     <div class="message-item-box">
         <div class="message-item" th:each="mi : ${messageItemList}">
             <h4 class="heading-mini" th:text="${mi.companyName}">Name of the Company</h4>
@@ -48,6 +52,18 @@
         </div>
 
     </div>
+
+    <div class="container">
+        <div class="footer__panel">
+            <h3 class="heading_footer">Инструкция</h3>
+            <p class="text footer_text">Для отправки сообщений нажмите кнопку или вернитесь назад
+            </p>
+        </div>
+        <div class="footer__panel">
+            <a href="#" class="management__button">Отправить</a>
+        </div>
+    </div>
+
 </div>
 
 </body>

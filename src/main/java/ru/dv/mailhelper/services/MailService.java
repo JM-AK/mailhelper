@@ -14,6 +14,8 @@ import java.util.List;
 @Service
 public class MailService {
     private JavaMailSender sender;
+
+    private static final String FROM_SENDER_NAME = "FinanceTeam";
     private static final Logger logger = LoggerFactory.getLogger(MailService.class);
 
     @Autowired
@@ -43,7 +45,7 @@ public class MailService {
         MimeMessagePreparator preparator = mimeMessage -> {
             MimeMessageHelper message = new MimeMessageHelper(mimeMessage, (attachPath != null), "UTF-8");
             message.setTo(toAddress.replaceAll("\\[(.*?)\\]", "$1").split("[,;]"));
-            message.setFrom(from, "<From Name>");
+            message.setFrom(from, FROM_SENDER_NAME);
             message.setSubject(subject);
             if (!(ccAddress == null || ccAddress.equals("")))
                 message.setCc(ccAddress.replaceAll("\\[(.*?)\\]", "$1").split("[;,]"));

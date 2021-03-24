@@ -43,12 +43,12 @@ public class MailService {
             message.setTo(toAddress.replaceAll("\\[(.*?)\\]", "$1").split("[,;]"));
             message.setFrom(from, "<From Name>");
             message.setSubject(subject);
-            if (ccAddress != null)
+            if (!(ccAddress == null || ccAddress.equals("")))
                 message.setCc(ccAddress.replaceAll("\\[(.*?)\\]", "$1").split("[;,]"));
-            if (bccAddress != null)
+            if (!(bccAddress == null || bccAddress.equals("")))
                 message.setBcc(bccAddress.replaceAll("\\[(.*?)\\]", "$1").split("[;,]"));
             message.setText(body, false);
-            if (attachPath != null) {
+            if (!(attachPath == null || attachPath.equals(""))) {
                 FileSystemResource file = new FileSystemResource(attachPath);
                 message.addAttachment(file.getFilename(), file);
             }

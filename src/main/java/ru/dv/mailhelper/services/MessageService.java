@@ -80,12 +80,20 @@ public class MessageService {
         Iterator<MessageItemDto> iter = messageItemList.iterator();
         while (iter.hasNext()){
             MessageItemDto mi = iter.next();
-            mailService.sendMailWithAttachment(message.getUser().getEmail(),
-                    mi.getEmailTo(),
-                    mi.getEmailCopy(),
-                    mi.getEmailBcc(),
-                    mi.getSubject(), mi.getBody(), mi.getAttachmentList().toString());
 
+            if(mi.getAttachmentList() == null || mi.getAttachmentList().isEmpty()) {
+                mailService.sendMail(message.getUser().getEmail(),
+                        mi.getEmailTo(),
+                        mi.getEmailCopy(),
+                        mi.getEmailBcc(),
+                        mi.getSubject(), mi.getBody());
+            } else {
+                mailService.sendMailWithAttachment(message.getUser().getEmail(),
+                        mi.getEmailTo(),
+                        mi.getEmailCopy(),
+                        mi.getEmailBcc(),
+                        mi.getSubject(), mi.getBody(), mi.getAttachmentList().toString());
+            }
         }
     }
 }

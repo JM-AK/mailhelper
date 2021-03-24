@@ -6,6 +6,7 @@ import ru.dv.mailhelper.beans.MsgBuild;
 import ru.dv.mailhelper.entities.Message;
 import ru.dv.mailhelper.entities.MessageItem;
 import ru.dv.mailhelper.entities.User;
+import ru.dv.mailhelper.entities.dtos.MessageItemDto;
 import ru.dv.mailhelper.repositories.MessageRepository;
 
 import javax.transaction.Transactional;
@@ -18,6 +19,7 @@ public class MessageService {
     private MessageRepository messageRepository;
     private MessageStatusService messageStatusService;
     private MailService mailService;
+    private MessageItemConverter messageItemConverter;
 
     @Autowired
     public void setMessageRepository(MessageRepository messageRepository) {
@@ -32,6 +34,11 @@ public class MessageService {
     @Autowired
     public void setMailService(MailService mailService) {
         this.mailService = mailService;
+    }
+
+    @Autowired
+    public void setMessageItemConverter(MessageItemConverter messageItemConverter) {
+        this.messageItemConverter = messageItemConverter;
     }
 
     public List<Message> findAll(){
@@ -69,21 +76,16 @@ public class MessageService {
     }
 
     public void sendMessage(Message message) {
-        Iterator<MessageItem> iter = message.getMessageItems().iterator();
+        List<MessageItemDto> messageItemList = messageItemConverter.mapEntityListToDtoList(message.getMessageItems());
+        Iterator<MessageItemDto> iter = messageItemList.iterator();
         while (iter.hasNext()){
-            MessageItem mi = iter.next();
-//            mailService.sendMailWithAttachment(message.getUser().getEmail(),
-//                    mi.getMailing().getContactTo().toString(),
-//                    mi.getMailing().getContactCopy().toString(),
-//                    mi.getMailing().getContactBcc().toString(),
-//                    mi.getSubject(), mi.getBody(), mi.getAttachmentList().toString());
-
-            System.out.println(mi.getMailing().getContactTo().toString());
-            System.out.println(mi.getSubject());
-            System.out.println(mi.getBody());
-            System.out.println(mi.getAttachmentList().toString());
+            MessageItemDto mi = iter.next();
+            mailService.sendMailWithAttachment(message.getUser().getEmail(),
+                    mi.getEmailTo(),
+                    mi.getEmailCopy(),
+                    mi.getEmailBcc(),
+                    mi.getSubject(), mi.getBody(), mi.getAttachmentList().toString());
 
         }
     }
-
 }

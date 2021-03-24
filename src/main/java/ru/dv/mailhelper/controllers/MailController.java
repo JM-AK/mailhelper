@@ -57,12 +57,9 @@ public class MailController {
             return "redirect:/login";
         }
 
-        User user = userService.findByUsername(principal.getName());
         MsgBuild msgBuild = (MsgBuild) httpServletRequest.getSession().getAttribute("msgbuild");
-        Message message = messageService.createMessage(msgBuild, user);
-        List<MessageItemDto> messageItemList = messageItemConverter.mapEntityListToDtoList(message.getMessageItems());
+        List<MessageItemDto> messageItemList = messageItemConverter.mapEntityListToDtoList(msgBuild.getItems());
         model.addAttribute("messageItemList", messageItemList);
-        model.addAttribute("message", message);
         return "message-preparator";
     }
 
@@ -71,10 +68,12 @@ public class MailController {
         if (principal == null) {
             return "redirect:/login";
         }
-
-        Message message = (Message) httpServletRequest.getSession().getAttribute("message");
+        User user = userService.findByUsername(principal.getName());
+        MsgBuild msgBuild = (MsgBuild) httpServletRequest.getSession().getAttribute("msgbuild");
+        Message message = messageService.createMessage(msgBuild, user);
         messageService.sendMessage(message);
         message.setSentDate(LocalDateTime.now());
+        messageService.changeMessageStatus(message, 2L);
         message = messageService.saveMessage(message);
         return "index";
     }

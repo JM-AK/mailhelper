@@ -14,7 +14,6 @@ import java.util.List;
 @Service
 public class MailService {
     private JavaMailSender sender;
-
     private static final String FROM_SENDER_NAME = "FinanceTeam";
     private static final Logger logger = LoggerFactory.getLogger(MailService.class);
 

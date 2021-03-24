@@ -92,7 +92,7 @@ public class MessageService {
                         mi.getEmailTo(),
                         mi.getEmailCopy(),
                         mi.getEmailBcc(),
-                        mi.getSubject(), mi.getBody(), mi.getAttachmentList().toString());
+                        mi.getSubject(), mi.getBody(), mi.getAttachmentList(), mi.getUploadFolder());
             }
         }
     }

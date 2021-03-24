@@ -9,6 +9,8 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class MailService {
     private JavaMailSender sender;
@@ -20,13 +22,13 @@ public class MailService {
     }
 
     public void sendMail(String from, String toAddress, String ccAddress, String bccAddress, String subject, String body) {
-        MimeMessagePreparator preparator = createMessage(from, toAddress,ccAddress,bccAddress, subject, body, null);
+        MimeMessagePreparator preparator = createMessage(from, toAddress,ccAddress,bccAddress, subject, body, null, null);
         sender.send(preparator);
         logger.info("Email sent successfully To {},{} with Subject {}", toAddress, ccAddress, subject);
     }
 
-    public void sendMailWithAttachment(String from, String toAddress, String ccAddress, String bccAddress, String subject, String body, String attachPath) {
-		MimeMessagePreparator preparator = createMessage(from, toAddress,ccAddress,bccAddress, subject, body, attachPath);
+    public void sendMailWithAttachment(String from, String toAddress, String ccAddress, String bccAddress, String subject, String body, List<String> attachPath, String uploadFolder) {
+		MimeMessagePreparator preparator = createMessage(from, toAddress,ccAddress,bccAddress, subject, body, attachPath, uploadFolder);
         sender.send(preparator);
         logger.info("Email sent successfully To {},{} with Subject {}", toAddress, ccAddress, subject);
     }
@@ -37,7 +39,7 @@ public class MailService {
                                                 String bccAddress,
                                                 String subject,
                                                 String body,
-                                                String attachPath) {
+                                                List<String> attachPath, String uploadFolder) {
         MimeMessagePreparator preparator = mimeMessage -> {
             MimeMessageHelper message = new MimeMessageHelper(mimeMessage, (attachPath != null), "UTF-8");
             message.setTo(toAddress.replaceAll("\\[(.*?)\\]", "$1").split("[,;]"));
@@ -48,9 +50,11 @@ public class MailService {
             if (!(bccAddress == null || bccAddress.equals("")))
                 message.setBcc(bccAddress.replaceAll("\\[(.*?)\\]", "$1").split("[;,]"));
             message.setText(body, false);
-            if (!(attachPath == null || attachPath.equals(""))) {
-                FileSystemResource file = new FileSystemResource(attachPath);
-                message.addAttachment(file.getFilename(), file);
+            if (attachPath != null) {
+                for (int i = 0; i < attachPath.size(); i++) {
+                    FileSystemResource file = new FileSystemResource(uploadFolder + "/" + attachPath.get(i));
+                    message.addAttachment(file.getFilename(), file);
+                }
             }
         };
         return preparator;

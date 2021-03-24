@@ -6,12 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.dv.mailhelper.beans.MsgBuild;
 import ru.dv.mailhelper.entities.Message;
-import ru.dv.mailhelper.entities.MessageItem;
 import ru.dv.mailhelper.entities.User;
 import ru.dv.mailhelper.entities.dtos.MessageItemDto;
 import ru.dv.mailhelper.services.MailService;
@@ -65,6 +62,7 @@ public class MailController {
         Message message = messageService.createMessage(msgBuild, user);
         List<MessageItemDto> messageItemList = messageItemConverter.mapEntityListToDtoList(message.getMessageItems());
         model.addAttribute("messageItemList", messageItemList);
+        model.addAttribute("message", message);
         return "message-preparator";
     }
 
@@ -74,11 +72,11 @@ public class MailController {
             return "redirect:/login";
         }
 
-        Message message = (Message) httpServletRequest.getSession().getAttribute("messageItemList");
+        Message message = (Message) httpServletRequest.getSession().getAttribute("message");
         messageService.sendMessage(message);
         message.setSentDate(LocalDateTime.now());
-//        message = messageService.saveMessage(message);
-        return "message-preparator";
+        message = messageService.saveMessage(message);
+        return "index";
     }
 
 

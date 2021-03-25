@@ -16,6 +16,22 @@
     opacity: 0.6;
 }
 
+.text_login {
+    color: #1F3F68;
+    letter-spacing: 0.05em;
+    opacity: 1;
+    align-self: center;
+}
+
+.top_text {
+    color: #FFFFFF;
+    font-size: 20px;
+}
+
+.top_text:hover {
+    opacity: 1;
+}
+
 .text_subject {
     font-size: 16px;
     line-height: 26px;
@@ -33,6 +49,73 @@
 .text_email {
     opacity: 1;
     font-size: 14px;
+}
+
+.top {
+    height: 100px;
+    background: #316099;
+
+}
+
+.sticky {
+    /* position: fixed; */
+    top: 0;
+    width: 100%;
+}
+
+.logo{
+    width: 100px;
+    transform:scaleX(-1);
+    margin: 5px 5px;
+    filter:invert();
+}
+
+.nav-label {
+    font-size: 36px;
+    color: #FFFFFF;
+}
+
+.top__navigation {
+    display: flex;
+    height: 100%;
+}
+
+.top__box {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    flex-grow: 1;
+}
+
+.top__navigation_menu {
+    padding-top: 42px;
+    display: flex;
+    justify-content: left;
+    list-style-type: none;
+}
+
+.nav-link {
+    text-decoration: none;
+}
+
+.btn-logout {
+    font:menu;
+    margin-right: 1px;
+    margin-left: 1px;
+    padding: 0px 5px;
+}
+
+.btn-login {
+    font:menu;
+    margin-right: 1px;
+    margin-left: 1px;
+    padding: 0px 5px;
+}
+
+.input-login {
+    font:menu;
+    margin-right: 1px;
+    margin-left: 1px;
 }
 
 .top__message {

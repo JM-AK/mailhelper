@@ -59,7 +59,7 @@ public class MailingController {
         return "redirect:/mailing";
     }
 
-    @PostMapping("/delete/{id}")
+    @GetMapping("/delete/{id}")
     public String deleteMailing(@PathVariable Long id) throws MailingNotFoundException {
         logger.info("Try to deleye mailing woth id: " + id);
         if(mailingService.findById(id).isEmpty()) {

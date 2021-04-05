@@ -26,10 +26,12 @@
         </a>
     </div>
 
-    <div th:unless="${mailingList.isEmpty()}">
-        <h3 class="heading_top">Общий список рассылки</h3>
+    <hr class="block-separator">
 
+    <div th:unless="${mailingList.isEmpty()}">
         <table class="mailing-table">
+            <caption class="mailing-table__caption">Общий список рассылки</caption>
+
             <thead class="mailing-table__head">
             <tr>
                 <th class="mailing-table__th_first" rowspan="2">ID</th>

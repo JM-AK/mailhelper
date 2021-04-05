@@ -230,6 +230,16 @@
     border-collapse: collapse;
 }
 
+.mailing-table__caption {
+    font-size: 36px;
+    text-align: left;
+    font-weight: 300;
+    line-height: 46px;
+    letter-spacing: 0.05em;
+    color: #000000;
+    padding-bottom: 15px;
+}
+
 .mailing-table__head {
     font-size: 18px;
     line-height: 28px;

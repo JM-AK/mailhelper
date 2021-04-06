@@ -3,160 +3,151 @@
 <html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
-    <meta charset="utf-8"/>
-
-    <title>Рассылка</title>
-
-    <link rel="icon" type="image/png" th:href="@{/favicon.ico}"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="main.css" />
+    <title>Текущая рассылка</title>
     <link rel="stylesheet" type="text/css"  th:href="@{/css/main.css}"/>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <meta name="ctx" th:content="${#httpServletRequest.getContextPath()}"/>
-
 </head>
 <body>
 
 <div th:replace="~{navigation :: navi(MsgBuild)}"/>
 
-<div class="container">
-    <br>
-    <h1>Настройка текущей рассылки</h1>
+<div class="content container">
+    <div class="container top__message">
+        <a href="#" class="heading-mini">Назад</a>
+        <h3 class="heading_top">Настройка текущей рассылки</h3>
+    </div>
 
     <div th:unless="${msgbuild.items.size() > 0}">
-        <span>Ваш список рассылки пуст</span>
+        <span>Ваш список рассылки пуст !!!</span>
     </div>
 
-    <div th:if="${msgbuild.getItems().size() > 0}">
-        <!-- таблица управляющая-->
-        <table class="table caption-top table-striped">
-            <caption>Список рассылки</caption>
-            <thead class="thead-light">
-            <tr>
-                <th>ID</th>
-                <th>ДЗО</th>
-                <th>Сообщение</th>
-                <th></th>
-                <th>Кому</th>
-                <th></th>
-                <th></th>
-                <th>Управление</th>
-                <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="mi, itrStat : ${msgbuild.getItems()}">
-                <td th:text="${itrStat.index+1}">1</td>
-                <td th:text="${mi.getMailing().getCompany().getShortName()}">company_2</td>
-                <td>
-                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMIText"
-                       aria-expanded="false" aria-controls="collapseMIText">
-                        Сообщение
-                    </button>
-                </td>
+    <div class="message-item-box" th:if="${msgbuild.getItems().size() > 0}">
+        <div class="message-item" th:each="mi , itrStat : ${msgbuild.getItems()}">
+            <h4 class="heading-mini">
+                <span>#</span>
+                <span th:text="${itrStat.index+1}">#1</span>
+                <span th:text="${mi.getMailing().getCompany().getShortName()}">Name of the Company</span>
+            </h4>
+            <ul class=contact__info>
+                <li class="contact__email">
+                    <span class="field_header">TO:</span>
+                    <span class="text text_email" th:each="c : ${mi.mailing.contactTo}">
+                            <span th:text="${c.email}">a@dddd.com</span>
+                            <span>(</span>
+                            <span th:text=${c.lastName}>Ivanov</span>
+                            <span>);</span>
+                        </span>
+                </li>
+                <li class="contact__email">
+                    <span class="field_header">COPY:</span>
+                    <span class="text text_email" th:each="c : ${mi.mailing.contactCopy}">
+                            <span th:text="${c.email}">a@dddd.com</span>
+                            <span>(</span>
+                            <span th:text=${c.lastName}>Ivanov</span>
+                            <span>);</span>
+                        </span>
+                </li>
+                <li class="contact__email">
+                    <span class="field_header">BCC:</span>
+                    <span class="text text_email" th:each="c : ${mi.mailing.contactBcc}">
+                            <span th:text="${c.email}">a@dddd.com</span>
+                            <span>(</span>
+                            <span th:text=${c.lastName}>Ivanov</span>
+                            <span>);</span>
+                        </span>
+                </li>
+            </ul>
+            <p class="text text_subject" th:text="${mi.subject}"> Subject</p>
 
-                <td colspan="1" >
-                    <table class="table mb-0" id="collapseMIText">
-                        <tbody>
-                        <tr> <td th:text="${mi.subject}">предмет</td></tr>
-                        <tr><td th:text="${mi.body}">тело</td></tr>
-                        <tr th:each="att : ${mi.attachmentList}">
-                            <td th:text="${att.path}">вложение</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </td>
+            <p class="text" th:text="${mi.body}">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Repudiandae deleniti
+                laudantium
+                repellat, nesciunt.</p>
 
-                <td colspan="1">
-                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse"  data-bs-target="#collapseMIContactList"
-                       aria-expanded="false" aria-controls="collapseMIContactList">
-                        Контакты
-                    </button>
-                </td>
-                <td colspan="1">
-                    <table class="table mb-0" id="collapseMIContactList">
-                        <tbody>
-                        <tr th:each="c : ${mi.mailing.contactTo}">
-                            <td>TO</td>
-                            <td th:text="${c.email}">C1@gmail.com</td>
-                            <td th:text="${c.lastName}">C1</td>
-                        </tr>
+            <p class="message__link" href="#">Приложения</p>
+            <ul class="contact__info">
+                <li class="text" th:each="attachment : ${mi.attachmentList}">
+                    <a class="message__link" href="#" th:text="${attachment.path}">Приложения</a>
+                </li>
+            </ul>
+            <br>
 
-                        <tr th:each="c : ${mi.mailing.contactCopy}">
-                            <td>COPY</td>
-                            <td th:text="${c.email}">C1@gmail.com</td>
-                            <td th:text="${c.lastName}">C1</td>
-                        </tr>
-                        <tr th:each="c : ${mi.mailing.contactBcc}">
-                            <td>BCC</td>
-                            <td th:text="${c.email}">C1@gmail.com</td>
-                            <td th:text="${c.lastName}">C1</td>
-                        </tr>
+            <div class="message-item-card__button-group">
+                <a class="mailing-table__link" th:href="@{/msgbuild/edit/{mailing_id}(mailing_id = ${mi.mailing.id})}">
+                    <!-- описание иконки кнопки-->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                         class="bi bi-arrow-down-left-square" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                              d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm10.096 3.146a.5.5 0 1 1 .707.708L6.707 9.95h2.768a.5.5 0 1 1 0 1H5.5a.5.5 0 0 1-.5-.5V6.475a.5.5 0 1 1 1 0v2.768l4.096-4.097z" />
+                    </svg>
+                    Изменить
+                </a>
 
-                        </tbody>
-                    </table>
-                </td>
-                <td colspan="1">
-                <td>
-                    <a class="btn btn-success"
-                       th:href="@{/msgbuild/edit/{mailing_id}(mailing_id = ${mi.mailing.id})}">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                             class="bi bi-arrow-down-left-square" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd"
-                                  d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm10.096 3.146a.5.5 0 1 1 .707.708L6.707 9.95h2.768a.5.5 0 1 1 0 1H5.5a.5.5 0 0 1-.5-.5V6.475a.5.5 0 1 1 1 0v2.768l4.096-4.097z"/>
-                        </svg>
-                    </a>
-                    <a class="btn btn-danger"
-                       th:href="@{/msgbuild/remove/{mailing_id}(mailing_id = ${mi.mailing.id})}">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                             class="bi bi-trash" viewBox="0 0 16 16">
-                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                            <path fill-rule="evenodd"
-                                  d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                        </svg>
-                    </a>
-                </td>
-                </td>
-            </tr>
-            <tr>
-                <td/>
-                <td/>
-                <td/>
-                <td>Итого в рассылке:</td>
-                <td th:text="${msgbuild.totalQuantity}"/>
-            </tr>
-            </tbody>
-        </table>
+                <a class="mailing-table__link" th:href="@{/msgbuild/remove/{mailing_id}(mailing_id = ${mi.mailing.id})}">
+                    <!-- описание иконки кнопки-->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                         class="bi bi-trash" viewBox="0 0 16 16">
+                        <path
+                                d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                        <path fill-rule="evenodd"
+                              d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                    </svg>
+                    Удалить
+                </a>
+
+
+            </div>
+
+        </div>
+
+
+
+
+    </div>
+
+    <div class="container" th:if="${msgbuild.getItems().size() > 0}">
+        <div class="footer__panel">
+            <h3 class="heading_footer">Инструкция</h3>
+            <p class="text footer_text">Для подготовки сообщений к отправке нажмите кнопку или вернитесь назад
+            </p>
+        </div>
 
         <!-- кнопки для отправки рассылки на подготовку сообщения-->
-        <a sec:authorize="isAuthenticated()" type="button" class="btn btn-primary" th:href="@{/mail/message/prepare}"
-           th:if="${msgbuild.items.size() > 0}">Подготовить сообщение</a>
-        <a sec:authorize="isAnonymous()" type="button" class="btn btn-primary" data-toggle="modal"
-           data-target="#authWarningModal">Подготовить сообщение</a>
 
+        <div class="footer__panel">
+            <a sec:authorize="isAuthenticated()" class="management__button" type="button"
+               th:href="@{/mail/message/prepare}" th:if="${msgbuild.items.size() > 0}">Подготовить сообщения</a>
+        </div>
+
+        <div class="footer__panel">
+            <a sec:authorize="isAnonymous()" class="management__button" type="button" data-toggle="modal"
+               data-target="#authWarningModal">Подготовить сообщения</a>
+        </div>
     </div>
-</div>
 
-<div class="modal fade" id="authWarningModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Предупреждение</h5>
-            </div>
-            <div class="modal-body">
-                <span>Для отправки сообщений Вам необходимо зайти в свою учетную запись</span>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Хорошо</button>
+    <!-- ПЕРЕДЕЛАТЬ !!!!!!!!-->
+
+    <div class="modal fade" id="authWarningModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Предупреждение</h5>
+                </div>
+                <div class="modal-body">
+                    <span>Для отправки сообщений Вам необходимо зайти в свою учетную запись</span>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Хорошо</button>
+                </div>
             </div>
         </div>
     </div>
 </div>
-
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
-        crossorigin="anonymous"></script>
 
 </body>
 </html>

@@ -143,6 +143,11 @@
     margin-bottom: 10px;
 }
 
+.message-item__separator {
+    margin: 16px;
+    color: #1f3f68;
+}
+
 .message__img {
     align-self: center;
     margin-bottom: 51px;
@@ -154,6 +159,11 @@
     letter-spacing: 0.05em;
     color: #5a98d0;
     text-decoration: none;
+}
+
+.message-item-card__button-group {
+    display: flex;
+    justify-content: space-around;
 }
 
 .content {
@@ -225,6 +235,7 @@
 
 .block-separator {
     margin: 32px;
+    color: #1f3f68;
 }
 
 .mailing-table {
@@ -281,6 +292,7 @@
 
 .mailing-table__link {
     text-decoration: none;
+    color: #1f3f68;
 }
 
 .mailing-table__link:hover {

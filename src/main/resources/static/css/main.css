@@ -221,12 +221,14 @@
     text-decoration: none;
 }
 
+/* Mailing page */
+
 .block-separator {
     margin: 32px;
 }
 
 .mailing-table {
-    width: 900px;
+    width: 100%;
     border-collapse: collapse;
 }
 
@@ -271,7 +273,18 @@
 .mailing-table__cell {
     padding-bottom: 5px;
     padding-right: 15px;
-    min-width: 15px;
+}
+
+.mailing-table__cell:first-child {
+    padding-left: 5px;
+}
+
+.mailing-table__link {
+    text-decoration: none;
+}
+
+.mailing-table__link:hover {
+    color: #5a98d0;
 }
 
 .mailing-table__cell_field {
@@ -280,15 +293,60 @@
     min-width: 50px;
 }
 
-.mailing-table__cell:first-child {
-    padding-left: 5px;
+/* Edit mailing page */
+
+.mailing-card__box {
+    display: flex;
+    justify-content: center;
 }
 
-.mailing-table__link {
+.mailing-card {
+    width: 500px;
+    align-self: center;
+    box-sizing: border-box;
+    padding: 44px 32px;
+    box-sizing: border-box;
+    background: #ffffff;
+    box-shadow: 5px 20px 50px rgba(16, 112, 177, 0.2);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.mailing-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-control {
+    border: 1px solid #ced4da;
+    font-size: 20px;
+    line-height: 30px;
+    letter-spacing: 0.05em;
     color: #1f3f68;
-    text-decoration: none;
+    margin-bottom: 14px;
 }
 
-.mailing-table__link:hover {
-    color: #5a98d0;
+.contact-checklist-table {
+    width: 100%;
+    letter-spacing: 0.05em;
+    color: #1f3f68;
+    text-align: left;
+}
+
+.cell_center {
+    text-align: center;
+}
+
+.mailing__button_save {
+    margin-top: 10px;
+    padding: 5px 5px;
+    font-size: 16px;
+    line-height: 26px;
+    text-align: center;
+    letter-spacing: 0.04em;
+    color: #ffffff;
+    background-color: #5a98d0;
+    border-radius: 5px;
+    border: 1px solid transparent;
 }

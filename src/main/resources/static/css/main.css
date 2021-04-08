@@ -361,6 +361,7 @@
     background-color: #5a98d0;
     border-radius: 5px;
     border: 1px solid transparent;
+    font: inherit;
 }
 /*для всплывающего сообщения*/
 

@@ -10,6 +10,16 @@
     <title>Текущая рассылка</title>
     <link rel="stylesheet" type="text/css"  th:href="@{/css/main.css}"/>
     <meta name="ctx" th:content="${#httpServletRequest.getContextPath()}"/>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#btn-authcheck").click(function(){
+                $("#authWarningModal").fadeToggle();
+            });
+        });
+    </script>
+
 </head>
 <body>
 
@@ -17,7 +27,7 @@
 
 <div class="content container">
     <div class="container top__message">
-        <a href="#" class="heading-mini">Назад</a>
+        <a th:href="@{/mailing}" class="heading-mini">Назад</a>
         <h3 class="heading_top">Настройка текущей рассылки</h3>
     </div>
 
@@ -28,8 +38,7 @@
     <div class="message-item-box" th:if="${msgbuild.getItems().size() > 0}">
         <div class="message-item" th:each="mi , itrStat : ${msgbuild.getItems()}">
             <h4 class="heading-mini">
-                <span>#</span>
-                <span th:text="${itrStat.index+1}">#1</span>
+                <span th:text="'#' + (${itrStat.index+1})">#1</span>
                 <span th:text="${mi.getMailing().getCompany().getShortName()}">Name of the Company</span>
             </h4>
             <ul class=contact__info>
@@ -98,14 +107,8 @@
                     </svg>
                     Удалить
                 </a>
-
-
             </div>
-
         </div>
-
-
-
 
     </div>
 
@@ -116,6 +119,12 @@
             </p>
         </div>
 
+        <div class="footer__panel" sec:authorize="isAnonymous()">
+            <h3 class="heading_footer text_warning">Предупреждение</h3>
+            <p class="text footer_text">Для отправки сообщений Вам необходимо зайти в свою учетную запись
+            </p>
+        </div>
+
         <!-- кнопки для отправки рассылки на подготовку сообщения-->
 
         <div class="footer__panel">
@@ -123,30 +132,25 @@
                th:href="@{/mail/message/prepare}" th:if="${msgbuild.items.size() > 0}">Подготовить сообщения</a>
         </div>
 
-        <div class="footer__panel">
-            <a sec:authorize="isAnonymous()" class="management__button" type="button" data-toggle="modal"
-               data-target="#authWarningModal">Подготовить сообщения</a>
-        </div>
+<!--        <div class="footer__panel">-->
+<!--            <a id="btn-authcheck"  sec:authorize="isAnonymous()" class="management__button" type="submit" data-toggle="modal"-->
+<!--               data-target="#authWarningModal">Подготовить сообщения</a>-->
+<!--        </div>-->
     </div>
 
-    <!-- ПЕРЕДЕЛАТЬ !!!!!!!!-->
-
-    <div class="modal fade" id="authWarningModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Предупреждение</h5>
-                </div>
-                <div class="modal-body">
-                    <span>Для отправки сообщений Вам необходимо зайти в свою учетную запись</span>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Хорошо</button>
-                </div>
-            </div>
-        </div>
-    </div>
+<!--    <div id="authWarningModal"-->
+<!--         aria-hidden="true">-->
+<!--        <div class="modal-dialog" role="document">-->
+<!--            <div class="modal-content">-->
+<!--                <div class="modal-header">-->
+<!--                    <h5 class="modal-title" id="exampleModalLabel">Предупреждение</h5>-->
+<!--                </div>-->
+<!--                <div class="modal-body">-->
+<!--                    <span>Для отправки сообщений Вам необходимо зайти в свою учетную запись</span>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
 </div>
 
 </body>

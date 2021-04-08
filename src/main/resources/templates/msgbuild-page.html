@@ -11,14 +11,14 @@
     <link rel="stylesheet" type="text/css"  th:href="@{/css/main.css}"/>
     <meta name="ctx" th:content="${#httpServletRequest.getContextPath()}"/>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
-        $(document).ready(function(){
-            $("#btn-authcheck").click(function(){
-                $("#authWarningModal").fadeToggle();
-            });
-        });
-    </script>
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
+<!--    <script>-->
+<!--        $(document).ready(function(){-->
+<!--            $("#btn-authcheck").click(function(){-->
+<!--                $("#authWarningModal").fadeToggle();-->
+<!--            });-->
+<!--        });-->
+<!--    </script>-->
 
 </head>
 <body>
@@ -47,7 +47,7 @@
                     <span class="text text_email" th:each="c : ${mi.mailing.contactTo}">
                             <span th:text="${c.email}">a@dddd.com</span>
                             <span>(</span>
-                            <span th:text=${c.lastName}>Ivanov</span>
+                            <span th:text="${c.lastName}">Ivanov</span>
                             <span>);</span>
                         </span>
                 </li>
@@ -56,7 +56,7 @@
                     <span class="text text_email" th:each="c : ${mi.mailing.contactCopy}">
                             <span th:text="${c.email}">a@dddd.com</span>
                             <span>(</span>
-                            <span th:text=${c.lastName}>Ivanov</span>
+                            <span th:text="${c.lastName}">Ivanov</span>
                             <span>);</span>
                         </span>
                 </li>
@@ -65,7 +65,7 @@
                     <span class="text text_email" th:each="c : ${mi.mailing.contactBcc}">
                             <span th:text="${c.email}">a@dddd.com</span>
                             <span>(</span>
-                            <span th:text=${c.lastName}>Ivanov</span>
+                            <span th:text="${c.lastName}">Ivanov</span>
                             <span>);</span>
                         </span>
                 </li>

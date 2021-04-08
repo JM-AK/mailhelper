@@ -2,72 +2,67 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <meta charset="utf-8"/>
-    <title>Настройка</title>
-    <link rel="icon" type="image/png" th:href="@{/favicon.ico}"/>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"
-            integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi"
-            crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js"
-            integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG"
-            crossorigin="anonymous"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="main.css" />
+    <title>Редактор сообщения</title>
     <meta name="ctx" th:content="${#httpServletRequest.getContextPath()}"/>
-    <link rel="stylesheet" type="text/css"  th:href="@{/css/main.css}"/>
-
+    <!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"-->
+    <!--          integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">-->
+    <!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>-->
+    <!--    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"-->
+    <!--            integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi"-->
+    <!--            crossorigin="anonymous"></script>-->
+    <!--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js"-->
+    <!--            integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG"-->
+    <!--            crossorigin="anonymous"></script>-->
 </head>
 <body>
 
 <div th:replace="~{navigation :: navi(Mailing)}"/>
 
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card">
-                <header class="card-header">
-                    <h4 class="card-title mt-2"><span
-                            th:text="'Настройка сообщения'"></span>
-                    </h4>
-                </header>
-                <article class="card-body">
-                    <form th:action="@{/msgbuild/edit}" th:object="${message_item}" th:method="POST"
-                          enctype="multipart/form-data">
-                        <input th:field="*{id}" type="hidden" class="form-control">
-                        <input th:field="*{mailing.id}" type="hidden" class="form-control">
-                        <div class="form-row">
-                            <div class="mb-3">
-                                <label>Тема сообщения</label>
-                                <input class="form-control" type="text" th:field="*{subject}" placeholder="">
-                            </div>
-                            <div class="mb-3">
-                                <label>Тело сообщения</label>
-                                <textarea class="form-control" rows="3" th:field="*{body}"></textarea>
-                            </div>
-                            <div class="mb-3">
-                                <label>Путь к папке для сохранения вложений</label>
-                                <input class="form-control" type="text" th:field="*{uploadFolder}" placeholder="N:\Финансовая служба\уу_2м21\Для отправки">
-                            </div>
-                        </div>
+<div class="container content">
+    <h3 class="heading_top">Редактор сообщения</h3>
 
-                        <!-- вложения ToDo-->
-                        <div class="input-group">
-                            <input class="form-control" id="inputFile" type="file" name="file" aria-describedby="inputFileAddon"
-                                   aria-label="Upload">
-                        </div>
-                        <br>
-                        <div class="form-group">
-                            <button class="btn btn-primary btn-block" type="submit"
-                            >Сохранить сообщение
-                            </button>
-                        </div>
+    <div class="mailing-card__box">
+        <article class="mailing-card">
+            <form th:action="@{/msgbuild/edit}" th:object="${message_item}" th:method="POST"
+                  enctype="multipart/form-data">
+                <input th:field="*{id}" type="hidden">
+                <input th:field="*{mailing.id}" type="hidden">
+                <div>
+                    <div class="mailing-field">
+                        <label class="field_header">Тема сообщения</label>
+                        <input th:field="*{subject}" type="text" class="form-control heading-mini"
+                               placeholder="Ваша Тема">
+                    </div>
 
-                    </form>
-                </article>
+                    <div class="mailing-field">
+                        <label class="field_header">Тело сообщения</label>
+                        <textarea th:field="*{body}" type="text" class="form-control heading-mini" rows="3"
+                                  placeholder="Ваше Сообщение"></textarea>
+                    </div>
 
-            </div>
-        </div>
+                    <div class="mailing-field">
+                        <label class="field_header">Путь к папке для сохранения вложений</label>
+                        <input th:field="*{uploadFolder}" type="text" class="form-control heading-mini"
+                               placeholder="N:\Финансовая служба\уу_2м21\Для отправки">
+                    </div>
+
+                    <div class="mailing-field">
+                        <input type="file" name="file" class="form-control__file text text_low-opacity"
+                               id="inputFile" aria-label="Upload" aria-describedby="inputFileAddon">
+                    </div>
+
+                    <br>
+                    <div>
+                        <button class="mailing__button_save" type="submit">
+                            Сохранить изменения
+                        </button>
+                    </div>
+            </form>
+        </article>
     </div>
 
 </div>

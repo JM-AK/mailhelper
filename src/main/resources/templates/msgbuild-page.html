@@ -72,14 +72,14 @@
             </ul>
             <p class="text text_subject" th:text="${mi.subject}"> Subject</p>
 
-            <p class="text" th:text="${mi.body}">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            <p class="text text_low-opacity" th:text="${mi.body}">Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 Repudiandae deleniti
                 laudantium
                 repellat, nesciunt.</p>
 
             <p class="message__link" href="#">Приложения</p>
             <ul class="contact__info">
-                <li class="text" th:each="attachment : ${mi.attachmentList}">
+                <li class="text text_low-opacity" th:each="attachment : ${mi.attachmentList}">
                     <a class="message__link" href="#" th:text="${attachment.path}">Приложения</a>
                 </li>
             </ul>

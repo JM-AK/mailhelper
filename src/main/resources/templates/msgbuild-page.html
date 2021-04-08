@@ -113,7 +113,7 @@
     </div>
 
     <div class="container" th:if="${msgbuild.getItems().size() > 0}">
-        <div class="footer__panel">
+        <div class="footer__panel" sec:authorize="isAuthenticated()">
             <h3 class="heading_footer">Инструкция</h3>
             <p class="text footer_text">Для подготовки сообщений к отправке нажмите кнопку или вернитесь назад
             </p>
@@ -127,8 +127,8 @@
 
         <!-- кнопки для отправки рассылки на подготовку сообщения-->
 
-        <div class="footer__panel">
-            <a sec:authorize="isAuthenticated()" class="management__button" type="button"
+        <div class="footer__panel" sec:authorize="isAuthenticated()">
+            <a  class="management__button" type="button"
                th:href="@{/mail/message/prepare}" th:if="${msgbuild.items.size() > 0}">Подготовить сообщения</a>
         </div>
 

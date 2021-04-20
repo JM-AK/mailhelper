@@ -8,6 +8,7 @@ import ru.dv.mailhelper.repositories.ContactRepository;
 import java.util.List;
 import java.util.Optional;
 
+//пример паттерна фасад
 @Service
 public class ContactService {
     private ContactRepository contactRepository;

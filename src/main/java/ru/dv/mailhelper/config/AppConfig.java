@@ -48,6 +48,7 @@ public class AppConfig implements WebMvcConfigurer {
 //        return fileMetaProvider;
 //    }
 
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(localeChangeInterceptor());

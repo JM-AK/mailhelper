@@ -3,30 +3,40 @@ package ru.dv.mailhelper.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.dv.mailhelper.entities.Contact;
-import ru.dv.mailhelper.repositories.ContactRepository;
+import ru.dv.mailhelper.repositories.ContactMapper;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class ContactService {
-    private ContactRepository contactRepository;
+    private ContactMapper contactMapper;
+
+    private Map<Long, Contact> contactMap = new HashMap<>();
 
     @Autowired
-    public void setContactRepository(ContactRepository contactRepository) {
-        this.contactRepository = contactRepository;
+    public void setContactRepository(ContactMapper contactMapper) {
+        this.contactMapper = contactMapper;
     }
 
-    public Contact saveContact(Contact contact) {
-        return contactRepository.save(contact);
+    public void saveContact(Contact contact) {
+        contactMap.put(contactMapper.save(contact), contact);
     }
 
-    public List<Contact> findAllContacts() {
-        return contactRepository.findAll();
+    public Collection<Contact> findAllContacts() {
+        if (contactMap.isEmpty()) {
+            List<Contact> contactList = contactMapper.findAll();
+            contactList.forEach(contact -> contactMap.put(contact.getId(),contact));
+            return contactList;
+        }
+        return contactMap.values();
     }
 
-    public Optional<Contact> findById (Long id) {
-        return contactRepository.findById(id);
+    public Contact findById (Long id) {
+        Contact c = contactMap.get(id);
+        if (c == null) {
+            c = contactMapper.findById(id);
+        }
+        return c;
     }
 
 }
